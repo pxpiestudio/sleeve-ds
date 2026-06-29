@@ -10,26 +10,26 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-[var(--accent)] text-white shadow-[0_8px_22px_var(--accent-soft)] hover:shadow-[0_14px_34px_color-mix(in_oklch,var(--accent)_32%,transparent)]",
+          "bg-accent text-white shadow hover:shadow-lg",
         ghost:
-          "bg-[var(--surface)] text-[var(--text)] border border-[var(--border-strong)] hover:bg-[var(--surface-2)]",
+          "bg-surface text-text border border-border-strong hover:bg-surface-2",
         quiet:
-          "text-[var(--text)] hover:bg-[color-mix(in_oklch,var(--text)_8%,transparent)]",
+          "text-text hover:bg-text/[0.08]",
         dark:
-          "bg-[var(--navy-surface)] text-[var(--on-navy)] hover:opacity-90",
+          "bg-navy-surface text-on-navy hover:opacity-90",
         outline:
-          "bg-transparent text-[var(--text)] border border-[var(--border-strong)] hover:bg-[var(--surface-2)]",
+          "bg-transparent text-text border border-border-strong hover:bg-surface-2",
         destructive:
-          "bg-[#e0466b] text-white hover:bg-[#c73a5a]",
+          "bg-destructive text-white hover:bg-destructive/90",
         link:
-          "text-[var(--accent)] underline-offset-4 hover:underline",
+          "text-accent underline-offset-4 hover:underline",
       },
       size: {
-        sm: "h-9 px-4 text-[13.5px] rounded-[11px]",
-        default: "h-11 px-5.5 text-[15px] rounded-[11px]",
-        lg: "h-14 px-7 text-[16.5px] rounded-[11px]",
-        icon: "h-10 w-10 rounded-[11px]",
-        "icon-sm": "h-8 w-8 rounded-[9px]",
+        sm: "h-9 px-4 text-[13.5px] rounded-lg",
+        default: "h-11 px-5.5 text-[15px] rounded-lg",
+        lg: "h-14 px-7 text-[16.5px] rounded-lg",
+        icon: "h-10 w-10 rounded-lg",
+        "icon-sm": "h-8 w-8 rounded-md",
       },
     },
     defaultVariants: {

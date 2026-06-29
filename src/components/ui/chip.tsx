@@ -14,8 +14,8 @@ const Chip = React.forwardRef<HTMLButtonElement, ChipProps>(
         className={cn(
           "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-medium transition-colors cursor-pointer",
           active
-            ? "bg-[var(--accent)] text-white border-[var(--accent)]"
-            : "bg-[var(--surface)] text-[var(--text)] border-[var(--border)] hover:border-[color-mix(in_oklch,var(--accent)_40%,transparent)] hover:text-[var(--accent)]",
+            ? "bg-accent text-white border-accent"
+            : "bg-surface text-text border-border hover:border-accent/40 hover:text-accent",
           className
         )}
         whileHover={{ scale: 1.03 }}

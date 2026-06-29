@@ -1,4 +1,3 @@
-import * as React from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 
@@ -81,7 +80,7 @@ function ClosablePanel({ children, isOpen, onClose, className }: ClosablePanelPr
         >
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 w-7 h-7 rounded-full grid place-items-center text-[var(--muted)] hover:text-[var(--text)] hover:bg-[var(--surface-2)] transition-colors cursor-pointer z-10"
+            className="absolute top-3 right-3 w-7 h-7 rounded-full grid place-items-center text-muted hover:text-text hover:bg-surface-2 transition-colors cursor-pointer z-10"
           >
             ✕
           </button>

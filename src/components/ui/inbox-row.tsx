@@ -39,7 +39,7 @@ function InboxRow({
   return (
     <motion.div
       className={cn(
-        "grid items-center gap-3 px-3.5 py-3 border-b border-[var(--border)] bg-[var(--surface)] transition-colors",
+        "grid items-center gap-3 px-3.5 py-3 border-b border-border bg-surface transition-colors",
         className
       )}
       style={{
@@ -51,10 +51,10 @@ function InboxRow({
       {onSelect && (
         <div
           className={cn(
-            "w-4 h-4 rounded-[4px] border flex items-center justify-center text-[9px] text-white font-extrabold cursor-pointer flex-shrink-0",
+            "w-4 h-4 rounded flex items-center justify-center text-[9px] text-white font-extrabold cursor-pointer flex-shrink-0",
             selected
-              ? "bg-[var(--accent)] border-[var(--accent)]"
-              : "border-[var(--border-strong)] bg-transparent"
+              ? "bg-accent border-accent"
+              : "border border-border-strong bg-transparent"
           )}
           onClick={onSelect}
         >
@@ -63,9 +63,9 @@ function InboxRow({
       )}
       <div className="flex-shrink-0">{image}</div>
       <div className="min-w-0">
-        <div className="font-heading font-bold text-[13.5px] text-[var(--text)] truncate">{title}</div>
+        <div className="font-heading font-bold text-[13.5px] text-text truncate">{title}</div>
         {subtitle && (
-          <div className="text-[11px] text-[var(--muted)] mt-0.5 truncate">{subtitle}</div>
+          <div className="text-[11px] text-muted mt-0.5 truncate">{subtitle}</div>
         )}
       </div>
       {status && (
@@ -75,11 +75,11 @@ function InboxRow({
       )}
       <div className="text-right flex-shrink-0">
         {price !== undefined && (
-          <div className="font-heading font-bold text-sm text-[var(--accent)]">
+          <div className="font-heading font-bold text-sm text-accent">
             ${price.toFixed(2)}
           </div>
         )}
-        {date && <div className="text-[11px] text-[var(--faint)] mt-0.5">{date}</div>}
+        {date && <div className="text-[11px] text-faint mt-0.5">{date}</div>}
       </div>
     </motion.div>
   )

@@ -34,8 +34,8 @@ const TableRow = React.forwardRef<HTMLTableRowElement, React.HTMLAttributes<HTML
     <motion.tr
       ref={ref}
       className={cn(
-        "border-b border-[var(--border)] transition-colors",
-        interactive && "cursor-pointer hover:bg-[color-mix(in_oklch,var(--text)_4%,transparent)]",
+        "border-b border-border transition-colors",
+        interactive && "cursor-pointer hover:bg-text/[0.04]",
         className
       )}
       whileHover={interactive ? { backgroundColor: "color-mix(in oklch, var(--text) 4%, transparent)" } : undefined}
@@ -51,7 +51,7 @@ const TableHead = React.forwardRef<HTMLTableCellElement, React.ThHTMLAttributes<
     <th
       ref={ref}
       className={cn(
-        "text-left font-semibold text-[11px] text-[var(--faint)] uppercase tracking-[0.06em] px-4 py-3 border-b border-[var(--border)] bg-[color-mix(in_oklch,var(--surface-2)_50%,transparent)]",
+        "text-left font-semibold text-[11px] text-faint uppercase tracking-[0.06em] px-4 py-3 border-b border-border bg-surface-2/50",
         className
       )}
       {...props}
@@ -64,7 +64,7 @@ const TableCell = React.forwardRef<HTMLTableCellElement, React.TdHTMLAttributes<
   ({ className, ...props }, ref) => (
     <td
       ref={ref}
-      className={cn("px-4 py-3.5 text-[var(--text)]", className)}
+      className={cn("px-4 py-3.5 text-text", className)}
       {...props}
     />
   )

@@ -12,7 +12,7 @@ function SegmentedControl({ options, value, onChange, className }: SegmentedCont
   return (
     <div
       className={cn(
-        "inline-flex p-1 gap-0.5 bg-[var(--bg-2)] rounded-[var(--radius-lg)]",
+        "inline-flex p-1 gap-0.5 bg-bg-2 rounded-lg",
         className
       )}
     >
@@ -23,14 +23,14 @@ function SegmentedControl({ options, value, onChange, className }: SegmentedCont
             key={opt.value}
             onClick={() => onChange(opt.value)}
             className={cn(
-              "relative px-3 py-1.5 rounded-[6px] text-xs font-semibold font-sans transition-colors cursor-pointer",
-              isActive ? "text-[var(--text)]" : "text-[var(--muted)] hover:text-[var(--text)]"
+              "relative px-3 py-1.5 rounded-md text-xs font-semibold font-sans transition-colors cursor-pointer",
+              isActive ? "text-text" : "text-muted hover:text-text"
             )}
           >
             {isActive && (
               <motion.div
                 layoutId="segmented-pill"
-                className="absolute inset-0 bg-[var(--surface)] rounded-[6px] shadow-sm"
+                className="absolute inset-0 bg-surface rounded-md shadow-sm"
                 transition={{ type: "spring", duration: 0.4, bounce: 0.15 }}
               />
             )}

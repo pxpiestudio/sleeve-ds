@@ -15,11 +15,11 @@ import { Search, Moon, Sun } from "lucide-react"
 
 function Swatch({ name, token, style }: { name: string; token: string; style?: React.CSSProperties }) {
   return (
-    <div className="rounded-[var(--radius)] overflow-hidden bg-[var(--surface)] border border-[var(--border)]">
+    <div className="rounded-lg overflow-hidden bg-surface border border-border">
       <div className="h-20 w-full" style={style} />
       <div className="p-3">
-        <div className="font-heading font-bold text-[13px] text-[var(--text)]">{name}</div>
-        <div className="font-mono text-[11px] text-[var(--muted)] mt-0.5">{token}</div>
+        <div className="font-heading font-bold text-[13px] text-text">{name}</div>
+        <div className="font-mono text-[11px] text-muted mt-0.5">{token}</div>
       </div>
     </div>
   )
@@ -37,7 +37,7 @@ function SectionTitle({ eyebrow, title, description }: { eyebrow: string; title:
 
 function Canvas({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-[var(--bg-2)] border border-[var(--border)] rounded-[var(--radius)] p-7">
+    <div className="bg-bg-2 border border-border rounded-lg p-7">
       {children}
     </div>
   )
@@ -82,19 +82,17 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
+    <div className="min-h-screen bg-bg text-text">
       {/* Navbar */}
-      <nav className="sticky top-0 z-10 flex items-center justify-between px-7 h-16 border-b border-[var(--border)] bg-[color-mix(in_oklch,var(--bg)_78%,transparent)] backdrop-blur-[14px] saturate-[140%]">
-        <div className="flex items-center gap-2.5 font-heading font-bold text-xl tracking-tight text-[var(--text)]">
-          <span className="w-7 h-7 rounded-lg bg-[var(--accent)] text-white flex items-center justify-center font-heading font-bold text-sm">
-            D
-          </span>
-          Deckcenter
+      <nav className="sticky top-0 z-10 flex items-center justify-between px-7 h-16 border-b border-border bg-bg/80 backdrop-blur-xl saturate-150">
+        <div className="flex items-center gap-2.5 font-heading font-bold text-xl tracking-tight text-text">
+          <img src="/assets/deckcenter-mark.svg" alt="Deckcenter" className="h-7 w-auto" />
+          <span className="hidden sm:inline">Deckcenter</span>
         </div>
         <div className="flex items-center gap-3">
           <motion.button
             onClick={toggleTheme}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-[var(--border-strong)] bg-[var(--surface)] text-[var(--text)] font-heading font-semibold text-xs cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border-strong bg-surface text-text font-heading font-semibold text-xs cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -108,16 +106,16 @@ export default function App() {
         {/* Hero */}
         <section className="pt-16 pb-10">
           <AnimateIn>
-            <div className="relative overflow-hidden rounded-[calc(var(--radius)*1.6)] p-12 md:p-14 mb-10"
-              style={{ background: "var(--navy-surface)" }}>
+            <div className="relative overflow-hidden rounded-2xl p-12 md:p-14 mb-10 bg-navy-surface">
               <div className="absolute inset-0 opacity-80"
                 style={{
-                  background: "radial-gradient(600px 360px at 88% 120%, color-mix(in oklch, var(--accent) 55%, transparent), transparent 60%), radial-gradient(520px 320px at 6% -20%, color-mix(in oklch, var(--purple) 50%, transparent), transparent 60%)",
+                  background: "radial-gradient(600px 360px at 88% 120%, color-mix(in oklch, var(--magenta) 55%, transparent), transparent 60%), radial-gradient(520px 320px at 6% -20%, color-mix(in oklch, var(--purple) 50%, transparent), transparent 60%)",
                 }}
               />
               <div className="relative z-[2] max-w-[640px]">
-                <h1 className="text-white mb-3.5">Deckcenter Design System</h1>
-                <p className="text-[var(--on-navy)]/75 text-base leading-relaxed mb-6 max-w-[52ch]">
+                <img src="/assets/deckcenter-logo-light.svg" alt="Deckcenter" className="h-14 w-auto mb-5" />
+                <h1 className="text-white mb-3.5">Design System</h1>
+                <p className="text-on-navy/75 text-base leading-relaxed mb-6 max-w-[52ch]">
                   A complete, themeable foundation for the Pokémon TCG marketplace. Every surface, token, component, and pattern — light and dark.
                 </p>
                 <div className="flex flex-wrap gap-2.5">
@@ -158,7 +156,7 @@ export default function App() {
           </AnimateIn>
 
           <AnimateIn delay={0.15}>
-            <h3 className="h3 text-[15.5px] mb-3.5">Surfaces <span className="font-medium text-[var(--faint)] text-xs ml-1">— theme-reactive</span></h3>
+            <h3 className="h3 text-[15.5px] mb-3.5">Surfaces <span className="font-medium text-faint text-xs ml-1">— theme-reactive</span></h3>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-8">
               <Swatch name="Background" token="--bg" style={{ background: "var(--bg)" }} />
               <Swatch name="Background 2" token="--bg-2" style={{ background: "var(--bg-2)" }} />
@@ -188,23 +186,23 @@ export default function App() {
           />
           <AnimateIn>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius)] p-6 shadow-[var(--shadow)]">
-                <div className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--faint)]">Display / Headings</div>
+              <div className="bg-surface border border-border rounded-lg p-6 shadow">
+                <div className="text-[11px] font-bold tracking-[0.08em] uppercase text-faint">Display / Headings</div>
                 <div className="font-heading font-extrabold text-[56px] leading-none tracking-[-0.03em] my-2.5">Aa</div>
-                <div className="font-heading font-bold text-base text-[var(--text)]">Saira 800</div>
-                <div className="text-[var(--muted)] text-xs mt-1">400 · 500 · 600 · 700 · 800</div>
+                <div className="font-heading font-bold text-base text-text">Saira 800</div>
+                <div className="text-muted text-xs mt-1">400 · 500 · 600 · 700 · 800</div>
               </div>
-              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius)] p-6 shadow-[var(--shadow)]">
-                <div className="text-[11px] font-bold tracking-[0.08em] uppercase text-[var(--faint)]">Body / Inputs</div>
+              <div className="bg-surface border border-border rounded-lg p-6 shadow">
+                <div className="text-[11px] font-bold tracking-[0.08em] uppercase text-faint">Body / Inputs</div>
                 <div className="font-sans font-medium text-[56px] leading-none tracking-[-0.01em] my-2.5">Aa</div>
-                <div className="font-heading font-bold text-base text-[var(--text)]">Geist</div>
-                <div className="text-[var(--muted)] text-xs mt-1">400 · 500 · 600 · 700</div>
+                <div className="font-heading font-bold text-base text-text">Geist</div>
+                <div className="text-muted text-xs mt-1">400 · 500 · 600 · 700</div>
               </div>
             </div>
           </AnimateIn>
 
           <AnimateIn delay={0.1}>
-            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            <div className="bg-surface border border-border rounded-lg overflow-hidden">
               {[
                 { label: "Display", spec: "Saira 800 · clamp→96 / -.035em", size: "46px", tracking: "-0.035em" },
                 { label: "Heading 1", spec: "Saira 800 · clamp→44", size: "36px", tracking: "-0.02em" },
@@ -215,7 +213,7 @@ export default function App() {
                 { label: "Small — meta, captions", spec: "Geist 500 · 12–13", size: "12.5px", muted: true },
                 { label: "EYEBROW LABEL", spec: "Saira 600 · 11.5 · .14em caps", size: "11.5px", eyebrow: true },
               ].map((t, i) => (
-                <div key={i} className="flex items-baseline justify-between gap-4 px-5 md:px-6 py-4 border-b border-[var(--border)] last:border-0">
+                <div key={i} className="flex items-baseline justify-between gap-4 px-5 md:px-6 py-4 border-b border-border last:border-0">
                   <span
                     className="font-heading font-extrabold"
                     style={{
@@ -227,7 +225,7 @@ export default function App() {
                   >
                     {t.label}
                   </span>
-                  <span className="font-mono text-[11px] text-[var(--faint)] whitespace-nowrap">{t.spec}</span>
+                  <span className="font-mono text-[11px] text-faint whitespace-nowrap">{t.spec}</span>
                 </div>
               ))}
             </div>
@@ -243,8 +241,8 @@ export default function App() {
           />
           <AnimateIn>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius)] p-6">
-                <div className="font-heading font-bold text-sm mb-3.5 text-[var(--text)]">Spacing scale</div>
+              <div className="bg-surface border border-border rounded-lg p-6">
+                <div className="font-heading font-bold text-sm mb-3.5 text-text">Spacing scale</div>
                 <div className="flex flex-col gap-2.5">
                   {[
                     { px: 8, label: "inline gaps, chip padding" },
@@ -255,29 +253,30 @@ export default function App() {
                     { px: 96, label: "section vertical rhythm" },
                   ].map((s) => (
                     <div key={s.px} className="flex items-center gap-3">
-                      <div className="h-3 bg-[var(--accent)] rounded-sm flex-shrink-0" style={{ width: s.px / 2 }} />
-                      <code className="text-xs w-8 text-[var(--text)]">{s.px}</code>
-                      <span className="text-xs text-[var(--faint)]">{s.label}</span>
+                      <div className="h-3 bg-accent rounded-sm flex-shrink-0" style={{ width: s.px / 2 }} />
+                      <code className="text-xs w-8 text-text">{s.px}</code>
+                      <span className="text-xs text-faint">{s.label}</span>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius)] p-6">
-                <div className="font-heading font-bold text-sm mb-3.5 text-[var(--text)]">Radius scale</div>
+              <div className="bg-surface border border-border rounded-lg p-6">
+                <div className="font-heading font-bold text-sm mb-3.5 text-text">Radius scale</div>
                 <div className="flex flex-col gap-3.5">
                   {[
-                    { label: "--radius-sm", radius: "10px" },
-                    { label: "--radius-md", radius: "14px" },
-                    { label: "--radius-lg", radius: "18px" },
-                    { label: "--radius-xl", radius: "26px" },
-                    { label: "--radius-full", radius: "9999px" },
+                    { label: "rounded-sm", radius: "10px" },
+                    { label: "rounded-md", radius: "14px" },
+                    { label: "rounded-lg", radius: "18px" },
+                    { label: "rounded-xl", radius: "26px" },
+                    { label: "rounded-2xl", radius: "32px" },
+                    { label: "rounded-full", radius: "9999px" },
                   ].map((r) => (
                     <div key={r.label} className="flex items-center gap-3">
                       <div
-                        className="w-14 h-8 border-[1.5px] border-[var(--accent)]"
+                        className="w-14 h-8 border-[1.5px] border-accent"
                         style={{ borderRadius: r.radius, background: "var(--accent-soft)" }}
                       />
-                      <code className="text-xs text-[var(--text)]">{r.label} · {r.radius}</code>
+                      <code className="text-xs text-text">{r.label} · {r.radius}</code>
                     </div>
                   ))}
                 </div>
@@ -394,12 +393,12 @@ export default function App() {
           <AnimateIn>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Panel hoverable className="p-6">
-                <div className="font-heading font-bold text-[var(--text)] mb-2">Hoverable Panel</div>
-                <p className="text-[var(--muted)]">Hover to see lift and shadow transition with Framer Motion.</p>
+                <div className="font-heading font-bold text-text mb-2">Hoverable Panel</div>
+                <p className="text-muted">Hover to see lift and shadow transition with Framer Motion.</p>
               </Panel>
               <Panel className="p-6">
-                <div className="font-heading font-bold text-[var(--text)] mb-2">Static Panel</div>
-                <p className="text-[var(--muted)]">No hover interaction — just a clean surface container.</p>
+                <div className="font-heading font-bold text-text mb-2">Static Panel</div>
+                <p className="text-muted">No hover interaction — just a clean surface container.</p>
               </Panel>
             </div>
           </AnimateIn>
@@ -415,10 +414,10 @@ export default function App() {
               <ClosablePanel
                 isOpen={closableOpen}
                 onClose={() => setClosableOpen(false)}
-                className="relative bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius)] p-6"
+                className="relative bg-surface border border-border rounded-lg p-6"
               >
-                <div className="font-heading font-bold text-[var(--text)] mb-2">Animated Close</div>
-                <p className="text-[var(--muted)]">This panel uses AnimatePresence for smooth enter/exit animations. Click the ✕ or the Close button to dismiss.</p>
+                <div className="font-heading font-bold text-text mb-2">Animated Close</div>
+                <p className="text-muted">This panel uses AnimatePresence for smooth enter/exit animations. Click the ✕ or the Close button to dismiss.</p>
               </ClosablePanel>
             </Canvas>
           </AnimateIn>
@@ -449,13 +448,13 @@ export default function App() {
                           {row.market && (
                             <Badge variant="default" shape="pill" className="!text-[9px] !px-1.5 !py-0.5">Mkt avg</Badge>
                           )}
-                          <span className="font-medium text-[var(--text)]">{row.store}</span>
+                          <span className="font-medium text-text">{row.store}</span>
                         </div>
                       </TableCell>
-                      <TableCell className="text-right font-heading font-bold text-[var(--text)]">
+                      <TableCell className="text-right font-heading font-bold text-text">
                         ${row.price.toFixed(2)}
                       </TableCell>
-                      <TableCell className="text-right text-[var(--faint)]">{row.over}</TableCell>
+                      <TableCell className="text-right text-faint">{row.over}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -472,13 +471,13 @@ export default function App() {
             description="Dense list pattern used in Purchases and Selling tabs. Framer Motion hover states."
           />
           <AnimateIn>
-            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            <div className="bg-surface border border-border rounded-lg overflow-hidden">
               {DEMO_INBOX.map((item) => (
                 <InboxRow
                   key={item.id}
                   image={
                     <div
-                      className="w-8 h-11 rounded-[6px] flex-shrink-0"
+                      className="w-8 h-11 rounded-md flex-shrink-0"
                       style={{
                         background: `linear-gradient(160deg, color-mix(in oklch, hsl(${item.hue} 70% 55%) 90%, white) 0%, hsl(${item.hue} 72% 42%) 55%, color-mix(in oklch, hsl(${item.hue} 70% 40%) 80%, #121427) 100%)`,
                         boxShadow: "inset 0 0 0 1px rgba(255,255,255,.18)",
@@ -556,8 +555,8 @@ export default function App() {
                   value={segmentValue}
                   onChange={setSegmentValue}
                 />
-                <span className="text-sm text-[var(--muted)]">
-                  Current role: <span className="font-heading font-bold text-[var(--text)]">{segmentValue}</span>
+                <span className="text-sm text-muted">
+                  Current role: <span className="font-heading font-bold text-text">{segmentValue}</span>
                 </span>
               </div>
             </Canvas>
@@ -575,7 +574,7 @@ export default function App() {
             <Canvas>
               <div className="flex flex-col gap-5 max-w-[560px]">
                 <div>
-                  <label className="text-[10.5px] font-bold tracking-[0.08em] uppercase text-[var(--faint)] mb-2 block">
+                  <label className="text-[10.5px] font-bold tracking-[0.08em] uppercase text-faint mb-2 block">
                     Search
                   </label>
                   <Input
@@ -587,13 +586,13 @@ export default function App() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="text-[10.5px] font-bold tracking-[0.08em] uppercase text-[var(--faint)] mb-2 block">
+                    <label className="text-[10.5px] font-bold tracking-[0.08em] uppercase text-faint mb-2 block">
                       Small
                     </label>
                     <Input inputSize="sm" placeholder="Small input" />
                   </div>
                   <div>
-                    <label className="text-[10.5px] font-bold tracking-[0.08em] uppercase text-[var(--faint)] mb-2 block">
+                    <label className="text-[10.5px] font-bold tracking-[0.08em] uppercase text-faint mb-2 block">
                       Large
                     </label>
                     <Input inputSize="lg" placeholder="Large input" />
@@ -634,7 +633,7 @@ export default function App() {
                     </motion.div>
                     {i < arr.length - 1 && (
                       <motion.div
-                        className="w-6 h-0.5 bg-[var(--border-strong)]"
+                        className="w-6 h-0.5 bg-border-strong"
                         initial={{ scaleX: 0 }}
                         whileInView={{ scaleX: 1 }}
                         viewport={{ once: true }}
@@ -661,7 +660,7 @@ export default function App() {
                 {[0, 1, 2, 3].map((i) => (
                   <motion.div
                     key={i}
-                    className="h-24 rounded-[var(--radius)] bg-[var(--surface-2)] border border-[var(--border)] flex items-center justify-center font-heading font-bold text-[var(--text)]"
+                    className="h-24 rounded-lg bg-surface-2 border border-border flex items-center justify-center font-heading font-bold text-text"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -680,7 +679,7 @@ export default function App() {
                     {[1, 2, 3, 4, 5].map((n, i) => (
                       <motion.div
                         key={n}
-                        className="h-10 rounded-[var(--radius-sm)] bg-[var(--surface)] border border-[var(--border)] flex items-center px-4 text-sm text-[var(--text)]"
+                        className="h-10 rounded-md bg-surface border border-border flex items-center px-4 text-sm text-text"
                         initial={{ opacity: 0, x: -20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
@@ -697,8 +696,11 @@ export default function App() {
         </section>
 
         {/* Footer */}
-        <footer className="mt-24 pt-10 border-t border-[var(--border)]">
-          <p className="text-xs text-[var(--faint)] font-semibold">
+        <footer className="mt-24 pt-10 border-t border-border">
+          <div className="flex items-center gap-3 mb-3">
+            <img src="/assets/deckcenter-logo.svg" alt="Deckcenter" className="h-8 w-auto opacity-60" />
+          </div>
+          <p className="text-xs text-faint font-semibold">
             Deckcenter Design System · v2.0 · 2026 · DC Design
           </p>
         </footer>

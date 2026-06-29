@@ -12,13 +12,12 @@ const Panel = React.forwardRef<HTMLDivElement, PanelProps>(
       <motion.div
         ref={ref}
         className={cn(
-          "bg-[var(--surface)] border border-[var(--border)] rounded-[var(--radius)]",
+          "bg-surface border border-border rounded-lg",
           hoverable && "cursor-pointer",
           className
         )}
         whileHover={hoverable ? {
           y: -2,
-          borderColor: "color-mix(in oklch, var(--accent) 35%, transparent)",
           boxShadow: "var(--shadow-lg)",
         } : undefined}
         transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}

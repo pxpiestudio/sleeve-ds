@@ -3,13 +3,16 @@
 /* ==========================================================================
    Deckcenter Design System — Tokens
    Simplified from ~/Desktop/Deckcenter/dc-styles.css
+   Semantic Tailwind v4 @theme mappings for color, radius, shadow, font
    ========================================================================== */
 
 @theme {
+  /* Fonts */
   --font-sans: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-heading: 'Saira', system-ui, sans-serif;
   --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
+  /* Radius — mapped to Tailwind utilities */
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 18px;
@@ -17,9 +20,48 @@
   --radius-2xl: 32px;
   --radius-3xl: 48px;
   --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(18,20,39,.06), 0 8px 24px rgba(18,20,39,.07);
+  --shadow: 0 1px 2px rgba(18,20,39,.06), 0 8px 24px rgba(18,20,39,.07);
+  --shadow-lg: 0 2px 4px rgba(18,20,39,.05), 0 24px 60px rgba(18,20,39,.16);
+  --shadow-xl: 0 2px 6px rgba(0,0,0,.5), 0 30px 70px rgba(0,0,0,.55);
+
+  /* Colors — semantic surface / text tokens */
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-navy: var(--navy);
+  --color-navy-surface: var(--navy-surface);
+  --color-on-navy: var(--on-navy);
+  --color-magenta: var(--magenta);
+  --color-purple: var(--purple);
+  --color-lavender: var(--lavender);
+  --color-lavender: var(--lavender);
+
+  /* Status colors */
+  --color-success: #1fad66;
+  --color-success-ghost: color-mix(in oklch, #1fad66 12%, transparent);
+  --color-warning: #f0a030;
+  --color-warning-ghost: color-mix(in oklch, #f0a030 12%, transparent);
+  --color-info: #2a6fdb;
+  --color-destructive: #e0466b;
+  --color-destructive-ghost: color-mix(in oklch, #e0466b 12%, transparent);
 }
 
 :root {
+  /* Base radius token (used by components directly) */
+  --radius: 18px;
+  --radius-pill: 999px;
+
   /* Brand */
   --navy: #121427;
   --magenta: #de0e7f;
@@ -47,10 +89,6 @@
   --shadow-lg: 0 2px 4px rgba(18,20,39,.05), 0 24px 60px rgba(18,20,39,.16);
   --navy-surface: #14172b;
   --on-navy: #e8edf9;
-
-  /* Sidebar */
-  --sidebar-width: 16rem;
-  --sidebar-width-icon: 3rem;
 }
 
 .dark,
@@ -85,7 +123,7 @@ body {
   overflow-x: hidden;
 }
 
-/* Semantic type */
+/* Semantic type scale */
 h1, .h1 {
   font-family: var(--font-heading);
   font-weight: 800;
