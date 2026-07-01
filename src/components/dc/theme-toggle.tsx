@@ -21,7 +21,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       onClick={toggleTheme}
       aria-label="Toggle color theme"
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-[var(--radius-pill)] border border-border-strong bg-surface-2 px-3 py-1.5 font-head text-xs font-semibold text-text transition-colors hover:bg-surface",
+        "inline-flex items-center gap-1.5 rounded-[var(--radius-pill)] border border-border-strong bg-surface-2 px-3 py-1.5 font-body text-xs font-semibold text-text transition-colors hover:bg-surface",
         className,
       )}
     >

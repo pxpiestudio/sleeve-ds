@@ -27,7 +27,7 @@ export function RarityChip({
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-[7px] bg-[color-mix(in_oklch,var(--navy-surface)_88%,transparent)] px-[9px] py-[5px] font-head text-[10.5px] font-bold uppercase tracking-[0.04em] text-on-navy",
+        "inline-flex items-center rounded-[7px] bg-[color-mix(in_oklch,var(--navy-surface)_88%,transparent)] px-[9px] py-[5px] font-body text-[10.5px] font-bold uppercase tracking-[0.04em] text-on-navy",
         className,
       )}
       {...props}

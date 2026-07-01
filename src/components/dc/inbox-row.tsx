@@ -88,10 +88,10 @@ export function InboxRow({
         className={cn("ib-thumb h-11 w-8 shrink-0 rounded-md", dim && "opacity-55")}
       />
 
-      <div className="ib-title min-w-0 truncate font-head text-[13.5px] font-bold">{title}</div>
+      <div className="ib-title min-w-0 truncate font-body text-[13.5px] font-bold">{title}</div>
       <div className="ib-subtitle min-w-0 truncate text-[11px] text-muted">{subtitle}</div>
       {note && (
-        <div className="ib-note min-w-0 truncate inline-flex items-center gap-1 rounded-full bg-[color-mix(in_oklch,var(--purple)_12%,transparent)] px-[9px] py-0.5 font-head text-[11px] font-semibold text-purple-text">
+        <div className="ib-note min-w-0 truncate inline-flex items-center gap-1 rounded-full bg-[color-mix(in_oklch,var(--purple)_12%,transparent)] px-[9px] py-0.5 font-body text-[11px] font-semibold text-purple-text">
           {note}
         </div>
       )}

@@ -86,7 +86,7 @@ function Step({
       />
       <span
         style={{
-          fontFamily: "var(--font-head)",
+          fontFamily: "var(--font-body)",
           fontWeight: 700,
           fontSize: 13,
           color: textColor,
@@ -587,7 +587,7 @@ export default function DesignSystemPage() {
             <div className="ds-canvas" style={{ marginTop: 12, background: "var(--navy-surface)" }}>
               <div
                 style={{
-                  fontFamily: "var(--font-head)",
+                  fontFamily: "var(--font-body)",
                   fontSize: 12,
                   fontWeight: 700,
                   letterSpacing: ".08em",
@@ -618,7 +618,7 @@ export default function DesignSystemPage() {
             <h2 className="ds-h2">Badges &amp; Chips</h2>
             <p className="ds-lead">
               Badges communicate grade and rarity. Status chips communicate order lifecycle.
-              All use <Code>font-head</Code> at 10–11px bold for clarity at small sizes.
+              All use <Code>font-body</Code> (Geist) at 10–11px bold for clean legibility at small sizes.
             </p>
 
             <div className="ds-h3">Grade badges</div>
@@ -685,7 +685,7 @@ export default function DesignSystemPage() {
                   border: "1px solid color-mix(in oklch,#8a2bb8 20%,transparent)",
                   fontSize: 13,
                   color: "var(--purple-text)",
-                  fontFamily: "var(--font-head)",
+                  fontFamily: "var(--font-body)",
                   fontWeight: 600,
                 }}
               >
@@ -855,7 +855,7 @@ export default function DesignSystemPage() {
                 subtitle="Obsidian Flames · Seller: PokeVault"
                 dim
                 status={
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "var(--font-head)", fontSize: 11, fontWeight: 700, padding: "4px 9px", borderRadius: 7, color: "var(--success-text)", background: "color-mix(in oklch,#1fad66 12%,transparent)", whiteSpace: "nowrap" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 700, padding: "4px 9px", borderRadius: 7, color: "var(--success-text)", background: "color-mix(in oklch,#1fad66 12%,transparent)", whiteSpace: "nowrap" }}>
                     ✅ Collected
                   </span>
                 }
@@ -872,7 +872,7 @@ export default function DesignSystemPage() {
                 subtitle="Evolving Skies · Seller: CardDen"
                 note="📍 Pick up at PokeNest Kanto · 0.8 km"
                 status={
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "var(--font-head)", fontSize: 11, fontWeight: 700, padding: "4px 9px", borderRadius: 7, color: "var(--purple-text)", background: "color-mix(in oklch,#8a2bb8 13%,transparent)", whiteSpace: "nowrap" }}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 4, fontFamily: "var(--font-body)", fontSize: 11, fontWeight: 700, padding: "4px 9px", borderRadius: 7, color: "var(--purple-text)", background: "color-mix(in oklch,#8a2bb8 13%,transparent)", whiteSpace: "nowrap" }}>
                     📍 At store · Ready
                   </span>
                 }
@@ -978,7 +978,7 @@ function SellingInbox() {
         >
           ✓
         </div>
-        <span style={{ fontSize: 11.5, color: "var(--muted)", fontFamily: "var(--font-head)", fontWeight: 600 }}>
+        <span style={{ fontSize: 11.5, color: "var(--muted)", fontFamily: "var(--font-body)", fontWeight: 600 }}>
           Select all · 2 sold
         </span>
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 8 }}>
@@ -997,7 +997,7 @@ function SellingInbox() {
         trailing={
           <button
             style={{
-              fontFamily: "var(--font-head)",
+              fontFamily: "var(--font-body)",
               fontSize: 11,
               fontWeight: 700,
               padding: "5px 10px",

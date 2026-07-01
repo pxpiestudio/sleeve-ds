@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
  * quiet is a text affordance.
  */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[11px] font-head font-semibold tracking-[-0.01em] transition-[transform,box-shadow,background-color,color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px active:scale-[0.99] disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[11px] font-body font-semibold tracking-[-0.01em] transition-[transform,box-shadow,background-color,color] duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent active:translate-y-px active:scale-[0.99] disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
