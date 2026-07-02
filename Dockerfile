@@ -4,7 +4,10 @@ FROM node:20-alpine AS base
 FROM base AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci
+# node:20-alpine ships npm 10.8.2, but the lockfile is generated with npm 11.
+# Match the generator so `npm ci` derives the same tree (avoids EUSAGE
+# "package.json and package-lock.json ... not in sync" over optional wasm deps).
+RUN npm install -g npm@11 && npm ci
 
 # ---- build ----
 FROM base AS builder
