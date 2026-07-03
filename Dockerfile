@@ -4,10 +4,14 @@ FROM node:20-alpine AS base
 FROM base AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
-# node:20-alpine ships npm 10.8.2, but the lockfile is generated with npm 11.
-# Match the generator so `npm ci` derives the same tree (avoids EUSAGE
-# "package.json and package-lock.json ... not in sync" over optional wasm deps).
-RUN npm install -g npm@11 && npm ci
+# node:20-alpine ships npm 10.8.2; match the lockfile's npm 11 generator.
+# Use `npm install` rather than `npm ci`: several optional wasm32-wasi
+# packages (@tailwindcss/oxide, @rolldown/binding, @unrs/resolver) each pin
+# their own nested @emnapi/* versions, and npm's lockfile writer produces a
+# graph `npm ci`'s strict self-consistency check rejects (EUSAGE) even right
+# after a clean `npm install` — a known npm quirk with this dependency shape,
+# not an actual package.json/package-lock.json drift.
+RUN npm install -g npm@11 && npm install --no-audit --no-fund
 
 # ---- build ----
 FROM base AS builder
