@@ -16,6 +16,11 @@ RUN npm install -g npm@11 && npm install --no-audit --no-fund
 # ---- build ----
 FROM base AS builder
 WORKDIR /app
+# NEXT_PUBLIC_* vars are inlined at build time, so this must be passed as a
+# Docker build arg (not just a runtime env var) for metadataBase to resolve
+# to the right domain per environment.
+ARG NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
