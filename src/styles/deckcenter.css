@@ -53,6 +53,28 @@
   --on-navy: #e8edf9;
 
   /*
+   * Documentation code blocks always render navy, regardless of light/dark
+   * theme (readability + brand consistency — same reasoning as the .nu-*
+   * utility-bar chrome, which these mirror). Defined once here, not
+   * repeated under .dark, since --navy-surface already resolves to the
+   * right navy per theme (#14172b light / #1c2038 dark) and the rest are
+   * literal on-navy alpha steps that don't need to change. Values chosen to
+   * clear 4.5:1 against BOTH navy-surface shades — verified in
+   * contrast.test.ts rather than eyeballed, since a color tuned for one
+   * navy isn't guaranteed to clear the other.
+   */
+  --code-bg: var(--navy-surface);
+  --code-text: var(--on-navy);
+  --code-muted: #9aa0c4;
+  --code-keyword: #e85ba8;
+  --code-string: #1fad66;
+  --code-tag: #538be2;
+  --code-faint: rgba(232, 237, 249, 0.55);
+  --code-border: rgba(232, 237, 249, 0.12);
+  --code-border-strong: rgba(232, 237, 249, 0.18);
+  --code-hover-bg: rgba(232, 237, 249, 0.08);
+
+  /*
    * WCAG AA text variants of the signal/brand colors above. The base
    * tokens (--accent, --success, --danger, --amber, --info, --purple)
    * stay at full brand saturation for backgrounds, dots and icons; these

@@ -18,6 +18,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Build artifacts and vendored agent-skill scripts — not our lint surface.
+    "dist/**",
+    ".agents/**",
+    ".claude/**",
   ]),
 ]);
 

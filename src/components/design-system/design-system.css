@@ -94,9 +94,21 @@
   margin-left: 256px;
 }
 .ds-wrap {
-  max-width: 1040px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 48px 120px;
+}
+/*
+ * Between the full-desktop width and the 900px point where the sidebar
+ * becomes a drawer, the fixed 256px sidebar plus the full 48px side padding
+ * squeezes tile grids to their narrowest comfortable columns — trimming
+ * padding here buys back width without touching the drawer layout below or
+ * the full padding above.
+ */
+@media (max-width: 1180px) {
+  .ds-wrap {
+    padding: 0 28px 120px;
+  }
 }
 
 /* ── Mobile docs chrome (header + drawer) — hidden on desktop ── */
@@ -222,15 +234,20 @@
 }
 
 /* ── Color swatches ── */
+/* Page-level display blocks carry the same 24px bottom beat as tables and
+   code blocks, so prose following them never sits flush (see the rhythm
+   note above .doc-page-header). */
 .swatch-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
+  margin-bottom: 24px;
 }
 .swatch-grid-5 {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 12px;
+  margin-bottom: 24px;
 }
 .swatch {
   border: 1px solid var(--border);
@@ -266,6 +283,7 @@
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+  margin-bottom: 24px;
 }
 .type-row {
   display: flex;
@@ -292,6 +310,12 @@
   border-radius: var(--radius);
   overflow: hidden;
 }
+/* Rows expect an inbox-list backdrop of --surface; without it the selected
+   row's translucent accent tint composites over the demo canvas (--bg-2)
+   and drops muted text below AA in light theme. */
+.demo-inbox {
+  background: var(--surface);
+}
 
 /* ── Card-art hue row ── */
 .hue-row {
@@ -305,10 +329,12 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
+  margin-bottom: 24px;
 }
 .ds-grid-3 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 24px;
 }
 .ds-grid-cards {
   display: grid;
@@ -401,5 +427,953 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
+  }
+}
+
+/* ============================================================
+   Multi-page documentation additions (doc-*).
+   Every text/background pair below is either already covered by
+   src/lib/contrast.test.ts or has a fixture row added alongside it.
+   ============================================================ */
+
+/* ── Skip link — first tab stop, visible only on focus ── */
+.ds-skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 120;
+  transform: translateY(-200%);
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: var(--shadow-lg);
+}
+.ds-skip-link:focus-visible {
+  transform: none;
+}
+
+/* ── Sidebar logo as a home link ── */
+.ds-logo-link {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 0;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 8px;
+}
+.ds-logo-link img {
+  height: 32px;
+  width: auto;
+}
+
+/* ── Page scaffolding ── */
+/* Vertical rhythm: tight inside a topic (14–20px), a clear beat between a
+   demo/table and the prose that follows (24–28px), generous between sections
+   (64px). Blocks own their bottom margin; headings own their top. */
+.doc-page-header {
+  padding-top: 56px;
+}
+.doc-h1 {
+  font-size: clamp(30px, 4vw, 40px);
+  margin: 0 0 10px;
+}
+.doc-section {
+  padding-top: 64px;
+}
+.doc-h2 {
+  font-size: 23px;
+  margin: 0 0 10px;
+}
+.doc-anchor {
+  color: inherit;
+  text-decoration: none;
+}
+.doc-anchor:hover::after {
+  content: " #";
+  color: var(--faint);
+  font-weight: 400;
+}
+.doc-prose {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text);
+  max-width: 85ch;
+  margin: 0 0 16px;
+}
+.doc-prose a,
+.doc-ul a {
+  color: var(--accent-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklch, var(--accent) 40%, transparent);
+  text-underline-offset: 3px;
+}
+.doc-prose a:hover,
+.doc-ul a:hover {
+  text-decoration-color: var(--accent);
+}
+.doc-ul {
+  margin: 0 0 16px;
+  padding-left: 20px;
+  max-width: 85ch;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.doc-import {
+  margin: 20px 0 0;
+}
+
+/* ── Code blocks — always navy, independent of light/dark theme, so code
+      reads consistently regardless of the surrounding page (see the
+      --code-* tokens in deckcenter.css for why these don't flip with .dark
+      like --surface-2/--accent-text/etc. do everywhere else). ── */
+.doc-code {
+  background: var(--code-bg);
+  border: 1px solid var(--code-border);
+  border-radius: 12px;
+  overflow: hidden;
+  /* Standalone blocks need air before the prose that follows them. Nested
+     contexts (.doc-example-code, .doc-import) reset this. */
+  margin: 0 0 24px;
+}
+.doc-code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 8px 6px 14px;
+  border-bottom: 1px solid var(--code-border);
+}
+.doc-code-lang {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--code-faint);
+}
+.doc-copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--code-faint);
+  background: transparent;
+  border: 1px solid var(--code-border-strong);
+  border-radius: 7px;
+  padding: 4px 9px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+.doc-copy-btn:hover {
+  color: var(--code-text);
+  background: var(--code-hover-bg);
+}
+.doc-code pre {
+  margin: 0;
+  padding: 14px 16px;
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--code-text);
+}
+/* Highlight classes — solid token colors on --code-bg (fixtures added). */
+.doc-tok-c {
+  color: var(--code-muted);
+  font-style: italic;
+}
+.doc-tok-s {
+  color: var(--code-string);
+}
+.doc-tok-k {
+  color: var(--code-keyword);
+}
+.doc-tok-t {
+  color: var(--code-tag);
+}
+
+/* ── Example: live preview + disclosure code ── */
+.doc-example {
+  margin: 0 0 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+.doc-example-preview {
+  background: var(--bg-2);
+  padding: 28px;
+}
+.doc-example-preview.on-navy {
+  background: var(--navy-surface);
+}
+/* Blocks that carry a bottom beat at page level shouldn't pad the canvas. */
+.doc-example-preview > :last-child {
+  margin-bottom: 0;
+}
+.doc-example-code {
+  border-top: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.doc-example-code summary {
+  cursor: pointer;
+  padding: 10px 16px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  user-select: none;
+  list-style: none;
+  transition: color 0.15s;
+}
+.doc-example-code summary::before {
+  content: "▸ ";
+  color: var(--faint);
+}
+.doc-example-code[open] summary::before {
+  content: "▾ ";
+}
+.doc-example-code summary::-webkit-details-marker {
+  display: none;
+}
+.doc-example-code summary:hover {
+  color: var(--text);
+}
+.doc-example-code .doc-code {
+  border: none;
+  border-top: 1px solid var(--code-border);
+  border-radius: 0;
+  margin: 0;
+}
+
+/* ── Reference tables (props, tokens) ── */
+.doc-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  margin: 16px 0 24px;
+}
+.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.doc-table th {
+  text-align: left;
+  font-family: var(--font-head);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--faint);
+  background: var(--surface-2);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.doc-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text);
+}
+/* Give the wrapping prose column (Description/Usage) a floor so narrow
+   viewports widen the table and scroll horizontally (per .doc-table-wrap)
+   instead of squeezing it into a sliver that wraps into a tall column of
+   near-empty rows. */
+.doc-table td:last-child {
+  min-width: 220px;
+}
+.doc-table tr:last-child td {
+  border-bottom: none;
+}
+.doc-table-code {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--accent-text);
+  background: var(--accent-soft);
+  padding: 1px 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.doc-table-type {
+  color: var(--muted);
+  background: transparent;
+  padding: 0;
+  white-space: normal;
+}
+.doc-token-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.doc-token-swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 0 1px var(--border-strong);
+  flex-shrink: 0;
+}
+
+/* ── Do / Don't guidance ── */
+.doc-dodont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 16px 0 24px;
+}
+.doc-dodont-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--success);
+  border-radius: 14px;
+  padding: 18px 20px;
+}
+.doc-dodont-card.dont {
+  border-top-color: var(--danger);
+}
+.doc-dodont-title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 13px;
+  margin: 0 0 10px;
+}
+.doc-dodont-title-do {
+  color: var(--success-text);
+}
+.doc-dodont-title-dont {
+  color: var(--danger-text);
+}
+.doc-dodont-card ul {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+/* ── Related links ── */
+.doc-related {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.doc-related li {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 16px;
+}
+.doc-related a {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent-text);
+  text-decoration: none;
+}
+.doc-related a:hover {
+  text-decoration: underline;
+}
+.doc-related span {
+  display: block;
+  font-size: 12.5px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+/* ── Prev / next pager ── */
+.doc-pagenav {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 72px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.doc-pagenav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 18px;
+  min-width: 150px;
+  max-width: 48%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  text-decoration: none;
+  transition: border-color 0.15s var(--ease), transform 0.2s var(--ease);
+}
+.doc-pagenav-link:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+.doc-pagenav-link.next {
+  margin-left: auto;
+  align-items: flex-end;
+  text-align: right;
+}
+.doc-pagenav-dir {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+}
+.doc-pagenav-label {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--text);
+}
+.doc-pagenav-link:hover .doc-pagenav-label {
+  color: var(--accent-text);
+}
+
+/* ── Index/gallery tiles (home, components overview) ── */
+.doc-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
+  gap: 16px;
+}
+.doc-tile {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: border-color 0.15s var(--ease), transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+.doc-tile:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+/*
+ * Miniature live-rendered preview of the component itself, cropped to a
+ * fixed stage. The rendered subtree is marked `inert` (see ComponentPreview
+ * callers) since real interactive controls (buttons, inputs, toggles) can't
+ * validly nest inside the tile's own <a> — inert drops them from the tab
+ * order and accessibility tree so axe sees one interactive element per tile,
+ * not a link wrapping buttons.
+ */
+.doc-tile-preview {
+  position: relative;
+  height: 136px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--bg-2);
+  background-image: radial-gradient(var(--border-strong) 1px, transparent 1px);
+  background-size: 16px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.doc-tile-preview > * {
+  pointer-events: none;
+}
+.doc-tile-body {
+  padding: 16px 22px 20px;
+}
+.doc-tile-title {
+  display: block;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+}
+.doc-tile-desc {
+  display: block;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.doc-tile:hover .doc-tile-title {
+  color: var(--accent-text);
+}
+
+/* ── Top-level section cards (home page: Foundations/Components/Patterns) ── */
+.doc-category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.doc-category-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 26px;
+  text-decoration: none;
+  transition: border-color 0.15s var(--ease), transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+.doc-category-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.doc-category-title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--text);
+}
+.doc-category-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin-top: 10px;
+  flex: 1;
+}
+.doc-category-count {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-top: 18px;
+}
+.doc-category-card:hover .doc-category-title {
+  color: var(--accent-text);
+}
+@media (max-width: 780px) {
+  .doc-category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Home principles — deliberately NOT cards, so the page isn't four
+      identical card grids in a row. Plain two-column prose with generous
+      gutters reads calmer and separates philosophy from navigation. ── */
+.doc-principles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px 48px;
+  max-width: 880px;
+}
+.doc-principle-title {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0 0 6px;
+}
+.doc-principle-body {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+@media (max-width: 640px) {
+  .doc-principles {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .doc-dodont {
+    grid-template-columns: 1fr;
+  }
+  .doc-pagenav {
+    flex-direction: column;
+  }
+  .doc-pagenav-link,
+  .doc-pagenav-link.next {
+    max-width: none;
+  }
+  .doc-page-header {
+    padding-top: 32px;
+  }
+}
+
+/* ── Logo anatomy (brand & logo page: core-logo construction) ──
+   The two source files the lockup is built from — word-logo.svg and
+   deckcenter-mark.svg — shown as real, separate assets. */
+.logo-anatomy-parts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.logo-anatomy-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 220px;
+}
+.logo-anatomy-part-canvas {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  min-height: 150px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+.logo-anatomy-plus {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 28px;
+  color: var(--faint);
+  align-self: flex-start;
+  margin-top: 56px;
+}
+.logo-anatomy-part-label {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text);
+  margin-top: 12px;
+}
+.logo-anatomy-part-sub {
+  font-size: 13px;
+  color: var(--faint);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+/* ── Clear space diagram ── */
+.logo-clearspace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 100%;
+}
+.logo-clearspace-box {
+  position: relative;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-clearspace-tick {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-clearspace-tick.top {
+  top: 0;
+  left: 50%;
+  width: 20px;
+  transform: translateX(-50%);
+  border-left: 1px dashed var(--border-strong);
+  border-right: 1px dashed var(--border-strong);
+}
+.logo-clearspace-tick.left {
+  left: 0;
+  top: 50%;
+  height: 20px;
+  transform: translateY(-50%);
+  border-top: 1px dashed var(--border-strong);
+  border-bottom: 1px dashed var(--border-strong);
+}
+.logo-clearspace-tick span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--faint);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1px 5px;
+  border-radius: 5px;
+}
+.logo-clearspace-caption {
+  font-size: 12px;
+  color: var(--faint);
+  margin-top: 10px;
+  text-align: center;
+  max-width: 320px;
+}
+
+/* ── Scalability row: same asset at several sizes, bottom-aligned ── */
+.logo-scale-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.logo-scale-item {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+}
+.logo-scale-item img {
+  align-self: flex-start;
+}
+.logo-scale-rule {
+  width: 100%;
+  height: 1px;
+  border: none;
+  background: var(--border-strong);
+  margin: 0;
+}
+.logo-scale-label {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--muted);
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* ── Incorrect usage grid: real assets, CSS-transformed to show the fault ── */
+.logo-incorrect-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.logo-incorrect-tile {
+  margin: 0;
+}
+.logo-incorrect-frame {
+  position: relative;
+  height: 128px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  padding: 16px;
+}
+.logo-incorrect-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 12px;
+  color: var(--danger-text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.logo-incorrect-tile figcaption {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: 9px;
+}
+
+@media (max-width: 640px) {
+  .logo-incorrect-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 420px) {
+  .logo-incorrect-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Motion playground (foundations/motion): a live tracer over the easing
+   curve, plus per-band tracks, so --ease and the duration bands are seen
+   in motion, not just read as numbers. ── */
+.motion-demo {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.motion-demo-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+.motion-demo-caption {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.motion-curve {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 22px 20px;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.motion-curve-chart {
+  position: relative;
+  flex: none;
+}
+.motion-curve-svg {
+  overflow: visible;
+}
+.motion-axis {
+  stroke: var(--border-strong);
+  stroke-width: 1;
+}
+.motion-handle {
+  stroke: var(--border-strong);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.motion-handle-dot {
+  fill: var(--muted);
+}
+.motion-curve-path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+.motion-curve-tracer-outer,
+.motion-curve-tracer-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.motion-curve-tracer-outer {
+  animation: motionTraceX var(--motion-dur, 0.9s) linear both;
+}
+.motion-curve-tracer-inner {
+  animation: motionTraceY var(--motion-dur, 0.9s) var(--ease) both;
+}
+.motion-curve-dot {
+  display: block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in oklch, var(--accent) 22%, transparent);
+}
+.motion-curve-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--muted);
+  min-width: 180px;
+}
+.motion-curve-legend strong {
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.motion-bands {
+  display: flex;
+  flex-direction: column;
+}
+.motion-band-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.motion-band-row:last-child {
+  border-bottom: none;
+}
+.motion-band-label {
+  font-weight: 600;
+  font-size: 14px;
+  flex: 1 1 auto;
+  min-width: 140px;
+}
+.motion-band-spec {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--faint);
+  white-space: nowrap;
+}
+.motion-band-play {
+  flex: none;
+}
+.motion-band-track {
+  position: relative;
+  width: 140px;
+  height: 12px;
+  flex: none;
+}
+.motion-band-track::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  transform: translateY(-50%);
+  background: var(--border);
+  border-radius: 2px;
+}
+.motion-band-dot {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  margin-top: -6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: motionBandMove var(--band-dur, 0.3s) var(--ease) var(--band-delay, 0ms) both;
+}
+
+@keyframes motionTraceX {
+  from { transform: translateX(0); }
+  to { transform: translateX(var(--trace-w, 0px)); }
+}
+@keyframes motionTraceY {
+  from { transform: translateY(0); }
+  to { transform: translateY(var(--trace-h, 0px)); }
+}
+@keyframes motionBandMove {
+  from { transform: translateX(0); }
+  to { transform: translateX(var(--band-w, 128px)); }
+}
+
+@media (max-width: 640px) {
+  .motion-curve {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .motion-band-row {
+    flex-wrap: wrap;
   }
 }

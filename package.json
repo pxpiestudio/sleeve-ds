@@ -30,7 +30,8 @@
     "start": "next start",
     "lint": "eslint",
     "test:contrast": "vitest run src/lib/contrast.test.ts",
-    "test:a11y": "playwright test",
+    "test:a11y": "playwright test --project=a11y",
+    "test:e2e": "playwright test --project=chromium --project=firefox --project=webkit",
     "build:lib": "tsup && node -e \"const f='dist/index.mjs',s=require('fs');s.writeFileSync(f,'\\\"use client\\\";\\n'+s.readFileSync(f,'utf8'))\" && cp src/styles/deckcenter.css dist/styles.css",
     "prepublishOnly": "npm run build:lib"
   },

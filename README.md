@@ -2,11 +2,16 @@
 
 A React implementation of the **Deckcenter** Pokémon TCG marketplace design
 system, built from the Claude Design handoff prototype. Tokens, components and
-the documentation page are all production code now: **Next.js (App Router) +
+the documentation site are all production code now: **Next.js (App Router) +
 TypeScript + Tailwind v4 + shadcn/ui**.
 
-The home route (`/`) is the living Design System page — a documented showcase of
-every foundation and component, with light/dark theming and an EN/ES toggle.
+The app is a full multi-page documentation site (in the spirit of Polaris /
+Primer / GitLab Design): an introduction and getting-started guide,
+**Foundations** (brand, color, typography, spacing, elevation, motion, icons,
+accessibility), a page per **Component** — live examples with copyable code,
+props tables, accessibility notes, do/don't guidance — and **Patterns** (order
+lifecycle, theming, internationalization). Light/dark theming and the EN/ES
+toggle work across every page.
 
 ## Getting started
 
@@ -22,10 +27,20 @@ npm run lint     # eslint (flat config)
 
 ```
 src/
+├─ styles/
+│  └─ deckcenter.css       # design tokens (:root / .dark) + Tailwind theme bridge
+│                          #   (shipped with the package as styles.css)
 ├─ app/
-│  ├─ globals.css          # design tokens (:root / .dark) + Tailwind theme bridge
+│  ├─ globals.css          # Tailwind entry — imports styles/deckcenter.css
 │  ├─ layout.tsx           # fonts (Saira / Geist) + Theme & Language providers
-│  └─ page.tsx             # the Design System documentation page
+│  └─ (docs)/              # the documentation site
+│     ├─ layout.tsx        #   skip link + sidebar shell + prev/next pager
+│     ├─ page.tsx          #   introduction (home)
+│     ├─ getting-started/
+│     ├─ foundations/      #   brand · color · typography · spacing ·
+│     │                    #   elevation · motion · icons · accessibility
+│     ├─ components/       #   overview + one page per component
+│     └─ patterns/         #   order-lifecycle · theming · internationalization
 ├─ components/
 │  ├─ ui/                  # shadcn-architecture primitives (cva + Slot asChild)
 │  │  ├─ button.tsx        #   primary · ghost · quiet, in 3 sizes
@@ -45,14 +60,17 @@ src/
 │  │  ├─ lang-toggle.tsx
 │  │  ├─ role-switcher.tsx
 │  │  └─ theme-toggle.tsx
-│  ├─ design-system/       # the docs shell (sidebar + scroll-spy + ds-* styles)
+│  ├─ docs/                # docs infrastructure: site map (nav.ts), shell,
+│  │                       #   Example / CodeBlock / PropsTable / TokenTable /
+│  │                       #   DoDont primitives, stateful demos
+│  ├─ design-system/       # docs stylesheet (ds-* shell + doc-* primitives)
 │  └─ providers/           # ThemeProvider (.dark) + LanguageProvider (EN/ES)
 └─ lib/utils.ts            # cn() — clsx + tailwind-merge
 ```
 
 ## Theming
 
-The design tokens are the source of truth in `globals.css`. Brand hues from the
+The design tokens are the source of truth in `src/styles/deckcenter.css`. Brand hues from the
 logo (`--magenta`, `--purple`, `--navy`, `--lavender`) seed semantic, theme-aware
 surfaces. They are mapped into Tailwind's theme via `@theme inline`, so utilities
 like `bg-surface`, `text-muted`, `border-border-strong` and `bg-accent` resolve

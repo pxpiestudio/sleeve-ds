@@ -28,11 +28,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Sleeve System",
+  title: {
+    default: "Sleeve System",
+    template: "%s · Sleeve System",
+  },
   description:
     "A complete, themeable React + Tailwind foundation for the Deckcenter marketplace. Every surface, token, component, and pattern — light and dark.",
   icons: {
-    icon: "/assets/deckcenter-icon.svg",
+    icon: "/assets/deckcenter-mark.svg",
   },
 };
 
