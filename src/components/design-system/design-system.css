@@ -327,13 +327,13 @@
 /* ── Generic content grids (logo variants, spec cards, product cards) ── */
 .ds-grid-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 16px;
   margin-bottom: 24px;
 }
 .ds-grid-3 {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
   margin-bottom: 24px;
 }
 .ds-grid-cards {
@@ -410,7 +410,7 @@
   .ds-grid-2,
   .ds-grid-3,
   .ds-grid-cards {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .ds-field-row {
     flex-direction: column;
@@ -627,6 +627,20 @@
 .doc-example-code {
   border-top: 1px solid var(--border);
   background: var(--surface-2);
+  interpolate-size: allow-keywords;
+}
+.doc-example-code::details-content {
+  block-size: 0;
+  overflow: clip;
+  opacity: 0;
+  transition:
+    content-visibility 0.22s allow-discrete,
+    block-size 0.22s ease,
+    opacity 0.18s ease;
+}
+.doc-example-code[open]::details-content {
+  block-size: auto;
+  opacity: 1;
 }
 .doc-example-code summary {
   cursor: pointer;
@@ -775,30 +789,39 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: 10px;
 }
-.doc-related li {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 13px 16px;
+.doc-related li + li {
+  border-top: 1px solid var(--border);
 }
-.doc-related a {
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--accent-text);
+.doc-related-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 2px;
   text-decoration: none;
 }
-.doc-related a:hover {
-  text-decoration: underline;
+.doc-related-label {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 14.5px;
+  color: var(--text);
+  transition: color 0.15s var(--ease), transform 0.15s var(--ease);
 }
-.doc-related span {
-  display: block;
-  font-size: 12.5px;
-  color: var(--muted);
-  margin-top: 3px;
+.doc-related-arrow {
+  flex: none;
+  color: var(--faint);
+  transition: color 0.15s var(--ease), transform 0.15s var(--ease);
+}
+.doc-related-link:hover .doc-related-label,
+.doc-related-link:focus-visible .doc-related-label {
+  color: var(--accent-text);
+  transform: translateX(3px);
+}
+.doc-related-link:hover .doc-related-arrow,
+.doc-related-link:focus-visible .doc-related-arrow {
+  color: var(--accent-text);
+  transform: translateX(3px);
 }
 
 /* ── Prev / next pager ── */
@@ -1008,6 +1031,11 @@
   .doc-pagenav-link,
   .doc-pagenav-link.next {
     max-width: none;
+  }
+  .doc-pagenav-link.next {
+    margin-left: 0;
+    align-items: flex-start;
+    text-align: left;
   }
   .doc-page-header {
     padding-top: 32px;
@@ -1375,5 +1403,153 @@
   }
   .motion-band-row {
     flex-wrap: wrap;
+  }
+}
+
+/* ── Theming: light/dark platform-screen comparison slider ──
+   Both layers render the same real components (Navbar + ProductCard) at
+   once, each pinned to a theme via .theme-force-light/-dark; the dark
+   layer's clip-path is animated by drag/keyboard, wiping it against the
+   light layer underneath. Grid-stacking (both layers in the same implicit
+   cell) lets the frame auto-size to the content instead of needing a
+   hardcoded height. */
+.theme-compare {
+  width: 100%;
+}
+.theme-compare-frame {
+  position: relative;
+  display: grid;
+  container-type: inline-size;
+  container-name: theme-compare;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-lg);
+  cursor: ew-resize;
+}
+.theme-compare-layer {
+  grid-area: 1 / 1;
+}
+.theme-compare-screen {
+  display: flex;
+  flex-direction: column;
+}
+.theme-compare-grid.ds-grid-cards {
+  gap: 16px;
+  margin: 0;
+  padding: 20px;
+  background: var(--bg);
+}
+.theme-compare-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--surface);
+  box-shadow: 0 0 0 1px var(--border-strong);
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 2;
+}
+.theme-compare-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+/* Full-frame transparent range input — the whole comparison acts as the
+   scrubber (click/drag anywhere, or tab to it and use arrow keys); the
+   visible handle above is purely decorative (aria-hidden). */
+.theme-compare-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+  appearance: none;
+  -webkit-appearance: none;
+  z-index: 3;
+}
+.theme-compare-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1px;
+  height: 1px;
+}
+.theme-compare-input::-moz-range-thumb {
+  width: 1px;
+  height: 1px;
+  border: none;
+}
+.theme-compare-input:focus-visible ~ .theme-compare-divider .theme-compare-handle {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+/* Bottom corners, not top — the top edge is the Navbar's own content
+   (logo, links, utility strip), and a top-pinned tag collided with it
+   (e.g. overlapping the "How it works" link). The grid's own padding
+   keeps the bottom corners clear of card content at every width. */
+.theme-compare-tag {
+  position: absolute;
+  bottom: 12px;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--navy-surface);
+  color: var(--on-navy);
+  pointer-events: none;
+}
+.theme-compare-tag.left {
+  left: 12px;
+}
+.theme-compare-tag.right {
+  right: 12px;
+}
+
+/* Container queries, not viewport media queries: the frame's own width is
+   what determines whether the embedded Navbar/grid have room, and that
+   width tracks the *frame* (full-bleed inside its preview canvas), not the
+   browser window — a wide desktop viewport with a narrow frame still needs
+   the mobile layout, which a @media query can never see. Thresholds mirror
+   the Navbar's real ones (800px hamburger cutoff, 640px card-grid cutoff)
+   so the preview collapses exactly where the live component would. */
+@container theme-compare (max-width: 800px) {
+  .theme-compare-frame .nav-inner {
+    padding: 0 16px;
+  }
+  .theme-compare-frame .nav-logo {
+    height: 30px;
+  }
+  .theme-compare-frame .nav-hamburger {
+    display: inline-flex;
+  }
+  .theme-compare-frame .nav-links,
+  .theme-compare-frame .nav-actions-desktop-only {
+    display: none;
+  }
+}
+@container theme-compare (max-width: 640px) {
+  /* 2-up rather than the site grid's usual 1-column mobile collapse — the
+     product cards stay legible at half-width and it keeps the comparison
+     from turning into one long single-file scroll. */
+  .theme-compare-grid.ds-grid-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

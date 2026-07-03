@@ -322,11 +322,11 @@ export default function BrandPage() {
                 }}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={v.src} alt={v.alt} style={{ height: 52 }} />
+                <img src={v.src} alt={v.alt} style={{ height: 72 }} />
               </div>
               <div
                 style={{
-                  fontSize: 12,
+                  fontSize: 14,
                   color: "var(--faint)",
                   fontWeight: 600,
                   textAlign: "center",
@@ -337,7 +337,7 @@ export default function BrandPage() {
               </div>
               <div
                 style={{
-                  fontSize: 11,
+                  fontSize: 13,
                   color: "var(--faint)",
                   textAlign: "center",
                   marginTop: 2,

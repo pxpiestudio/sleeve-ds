@@ -159,7 +159,12 @@ function buildFixtures(t: typeof light | typeof dark, theme: "light" | "dark"): 
     { source: ".doc-tok-s — code-string on --code-bg (code strings)", fg: "#1fad66", bg: t.navySurface, size: "normal" },
     { source: ".doc-tok-t — code-tag on --code-bg (code tags)", fg: "#538be2", bg: t.navySurface, size: "normal" },
     { source: ".doc-code-lang / .doc-copy-btn — code-faint (on-navy @ 55%, measured) on --code-bg", fg: compositeOver(t.onNavy, 0.55, t.navySurface), bg: t.navySurface, size: "normal" },
-    { source: ".doc-related a / .doc-pagenav-label:hover — accent-text on --surface", fg: t.accentText, bg: t.surface, size: "normal" },
+    { source: ".doc-pagenav-label:hover — accent-text on --surface", fg: t.accentText, bg: t.surface, size: "normal" },
+    { source: ".theme-compare-tag — on-navy on navy-surface (Light/Dark labels)", fg: t.onNavy, bg: t.navySurface, size: "normal" },
+    // .doc-related-link now sits directly on the page background (no card
+    // surface), so its states reuse already-covered --bg pairs: resting
+    // label = "body on --bg" (line above), resting arrow = "faint on --bg",
+    // hover/focus label+arrow = "accent-text on --bg" (.ds-eyebrow row).
   ];
 }
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/dc/theme-toggle";
+import { ThemeCompareSlider } from "@/components/docs/theme-compare";
 import { PageHeader, DocSection, Code, Prose, Related } from "@/components/docs/doc-bits";
 import { Example } from "@/components/docs/example";
 import { CodeBlock } from "@/components/docs/code-block";
@@ -40,6 +41,14 @@ export default function ThemingPage() {
 
 <ThemeToggle />  {/* or call toggleTheme() from your own control */}`}>
           <ThemeToggle />
+        </Example>
+        <Prose>
+          Drag the handle below — it&apos;s the same Navbar and ProductCard
+          components, each side pinned to a theme, so this is exactly what
+          re-resolving the tokens looks like on a real screen.
+        </Prose>
+        <Example>
+          <ThemeCompareSlider />
         </Example>
         <Prose>
           <Code>ThemeProvider</Code> reads the class with{" "}

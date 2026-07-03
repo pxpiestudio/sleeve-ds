@@ -6,7 +6,8 @@
    Source of truth: brand hues from the logo seed every surface.
    Semantic tokens resolve per-theme — toggle `.dark` and everything follows.
    ============================================================ */
-:root {
+:root,
+.theme-force-light {
   /* Brand (from logo) */
   --navy: #121427;
   --magenta: #de0e7f;
@@ -96,7 +97,13 @@
   --purple-text: var(--purple);
 }
 
-.dark {
+/* .theme-force-light / .theme-force-dark: pin a subtree to one theme
+   regardless of the ambient .dark class — a directly-set custom property
+   always wins over an inherited one, so these override an ancestor .dark
+   (or lack thereof) without needing !important. Used by the light/dark
+   comparison slider on the theming docs page. */
+.dark,
+.theme-force-dark {
   --bg: #0a0c18;
   --bg-2: #0e1124;
   --surface: #15182c;
@@ -117,6 +124,20 @@
   --amber-text: var(--amber);
   --info-text: #538be2;
   --purple-text: #b070cf;
+}
+
+/* `color` is inherited, not re-read from custom properties — a descendant
+   that never sets its own `color` (e.g. .pcard-name) keeps whatever value
+   was computed at the nearest ancestor that DID set one. Site-wide that's
+   `body { color: var(--text) }`, resolved once at the root, which is fine
+   because there's only one theme boundary. `.theme-force-*` opens a SECOND
+   boundary mid-tree, so it has to re-declare `color` (and `background`,
+   for the same reason) itself, or every unset-color descendant inside it
+   silently keeps the ambient theme's text color instead of its own. */
+.theme-force-light,
+.theme-force-dark {
+  color: var(--text);
+  background: var(--bg);
 }
 
 /* ============================================================

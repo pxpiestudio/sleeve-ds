@@ -73,6 +73,7 @@ export function Prose({ children }: { children: React.ReactNode }) {
 /* ── Related components footer ──────────────────────────────────────────── */
 import Link from "next/link";
 import { ALL_PAGES } from "@/components/docs/nav";
+import { Icon } from "@/components/dc/icon";
 
 export function Related({ hrefs }: { hrefs: string[] }) {
   const pages = hrefs
@@ -84,8 +85,10 @@ export function Related({ hrefs }: { hrefs: string[] }) {
       <ul className="doc-related">
         {pages.map((p) => (
           <li key={p.href}>
-            <Link href={p.href}>{p.label}</Link>
-            <span>{p.description}</span>
+            <Link href={p.href} className="doc-related-link">
+              <span className="doc-related-label">{p.label}</span>
+              <Icon name="arrow" size={15} className="doc-related-arrow" />
+            </Link>
           </li>
         ))}
       </ul>
