@@ -59,7 +59,10 @@ export function OgChrome({
       <div
         style={{
           position: "absolute",
-          inset: 0,
+          top: 0,
+          left: 0,
+          width: "1200px",
+          height: "630px",
           display: "flex",
           flexDirection: "row",
           padding: "64px",
@@ -119,9 +122,30 @@ export function OgChrome({
               color: T.muted,
               lineHeight: 1.45,
               maxWidth: 600,
+              marginBottom: 34,
             }}
           >
             {description}
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              alignSelf: "flex-start",
+              alignItems: "center",
+              gap: 10,
+              padding: "13px 24px",
+              borderRadius: 999,
+              backgroundColor: T.magenta,
+              boxShadow: "0 8px 22px rgba(222, 14, 127, 0.35)",
+            }}
+          >
+            <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 600, fontSize: 18, color: "#ffffff" }}>
+              Explore the docs
+            </span>
+            <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 600, fontSize: 18, color: "#ffffff" }}>
+              →
+            </span>
           </div>
         </div>
 
