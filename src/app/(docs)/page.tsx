@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { DOCS_NAV } from "@/components/docs/nav";
 import { DocSection, Prose } from "@/components/docs/doc-bits";
+import { APP_VERSION } from "@/lib/version";
 
 export const metadata: Metadata = {
   title: "Introduction",
@@ -164,7 +165,7 @@ export default function HomePage() {
       <DocSection
         id="status"
         title="Version & status"
-        lead="Sleeve System v2.1 ships as @pxpiestudio/sleeve-ds."
+        lead={`Sleeve System v${APP_VERSION} ships as @pxpiestudio/sleeve-ds.`}
       >
         <Prose>
           The documentation app and the published package render from the same

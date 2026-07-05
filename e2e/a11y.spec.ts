@@ -67,6 +67,41 @@ test("skip link is the first tab stop and targets the content region", async ({ 
   await expect(page).toHaveURL(/#docs-content$/);
 });
 
+test.describe("spotlight search", () => {
+  test("Cmd+K opens the spotlight, focuses the input, and Escape restores focus", async ({ page }) => {
+    await page.goto("/");
+    const trigger = page.getByRole("button", { name: "Search docs…" });
+    await trigger.focus();
+    await page.keyboard.press("ControlOrMeta+k");
+    const input = page.getByRole("combobox", { name: "Search the design system" });
+    await expect(input).toBeFocused();
+    await page.keyboard.press("Escape");
+    // Closed state is opacity/inert-driven (matches the sidebar drawer
+    // convention), not display:none, so assert on `inert` rather than
+    // Playwright's toBeHidden() (which opacity: 0 doesn't satisfy).
+    await expect(page.locator(".ds-spotlight")).toHaveAttribute("inert", "");
+    await expect(trigger).toBeFocused();
+  });
+
+  test("typing filters results and Enter navigates to the selected page", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: "Search docs…" }).click();
+    const input = page.getByRole("combobox", { name: "Search the design system" });
+    await input.fill("badge");
+    await expect(page.getByRole("option", { name: /^Badge/ })).toBeVisible();
+    await page.keyboard.press("Enter");
+    await expect(page).toHaveURL(/\/components\/badge$/);
+  });
+
+  test("spotlight search is axe-clean with results showing", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: "Search docs…" }).click();
+    await page.getByRole("combobox", { name: "Search the design system" }).fill("color");
+    await expect(page.getByRole("option").first()).toBeVisible();
+    await runAxe(page);
+  });
+});
+
 test("<html lang> follows the EN/ES language toggle", async ({ page }) => {
   await page.goto("/patterns/internationalization");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");

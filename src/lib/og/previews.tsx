@@ -73,7 +73,7 @@ function StrokeIcon({ name, size = 28, color = T.lavender, sw = 1.8 }: { name: k
 /* ── Overview ─────────────────────────────────────────────────────────── */
 export function IntroductionPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 22 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 22, transform: "scale(1.3)" }}>
       <Mark width={88} />
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
         <span style={{ display: "flex", fontFamily: "Saira", fontWeight: 700, fontSize: 32, color: T.text }}>Sleeve System</span>
@@ -100,7 +100,7 @@ export function GettingStartedPreview() {
 /* ── Foundations ──────────────────────────────────────────────────────── */
 export function BrandPreview() {
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 180, height: 180, border: `2px dashed ${T.borderStrong}`, borderRadius: 20 }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 180, height: 180, border: `2px dashed ${T.borderStrong}`, borderRadius: 20, transform: "scale(1.3)" }}>
       <Mark width={68} />
     </div>
   );
@@ -119,7 +119,7 @@ const COLOR_SWATCHES: [string, string][] = [
 
 export function ColorPreview() {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", width: 320, gap: 14 }}>
+    <div style={{ display: "flex", flexWrap: "wrap", width: 320, gap: 14, transform: "scale(1.1)" }}>
       {COLOR_SWATCHES.map(([name, color]) => (
         <div key={name} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 6, width: 66 }}>
           <div style={{ display: "flex", width: 66, height: 44, borderRadius: 10, backgroundColor: color, border: name === "Lavender" ? `1px solid ${T.borderStrong}` : "1px solid transparent" }} />
@@ -132,7 +132,7 @@ export function ColorPreview() {
 
 export function TypographyPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 6 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 6, transform: "scale(1.3)" }}>
       <span style={{ display: "flex", fontFamily: "Saira", fontWeight: 700, fontSize: 62, color: T.text, lineHeight: 1 }}>Aa</span>
       <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 500, fontSize: 32, color: T.text, lineHeight: 1 }}>Aa</span>
       <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 400, fontSize: 19, color: T.muted, lineHeight: 1 }}>Aa</span>
@@ -148,7 +148,7 @@ const SPACING_STEPS = [4, 8, 12, 16, 24, 32];
 
 export function SpacingPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 11 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 11, transform: "scale(1.3)" }}>
       {SPACING_STEPS.map((s) => (
         <div key={s} style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ display: "flex", width: s * 4, height: 14, borderRadius: 4, backgroundColor: T.magenta }} />
@@ -161,7 +161,7 @@ export function SpacingPreview() {
 
 export function ElevationPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "row", gap: 28 }}>
+    <div style={{ display: "flex", flexDirection: "row", gap: 28, transform: "scale(1.3)" }}>
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
         <div style={{ display: "flex", width: 104, height: 72, borderRadius: 14, backgroundColor: T.surface, boxShadow: "0 8px 24px rgba(0, 0, 0, 0.35)" }} />
         <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 400, fontSize: 13, color: T.muted }}>shadow</span>
@@ -183,7 +183,7 @@ const DURATIONS: [string, number][] = [
 
 export function MotionPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 13 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 13, transform: "scale(1.25)" }}>
       {DURATIONS.map(([label, w]) => (
         <div key={label} style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <div style={{ display: "flex", width: w, height: 10, borderRadius: 999, backgroundImage: `linear-gradient(90deg, ${T.magenta}, ${T.purple})` }} />
@@ -198,7 +198,7 @@ const ICON_TILE_NAMES: (keyof typeof STROKE_ICONS)[] = ["bolt", "heart", "shield
 
 export function IconsPreview() {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", width: 260, gap: 18, justifyContent: "center" }}>
+    <div style={{ display: "flex", flexWrap: "wrap", width: 260, gap: 18, justifyContent: "center", transform: "scale(1.3)" }}>
       {ICON_TILE_NAMES.map((name) => (
         <div key={name} style={{ display: "flex", width: 60, height: 60, borderRadius: 14, backgroundColor: T.surface, border: `1px solid ${T.border}`, alignItems: "center", justifyContent: "center" }}>
           <StrokeIcon name={name} />
@@ -210,7 +210,7 @@ export function IconsPreview() {
 
 export function AccessibilityPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16, transform: "scale(1.3)" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 96, height: 96, borderRadius: 9999, backgroundColor: T.surface, border: `2px solid ${T.success}` }}>
         <StrokeIcon name="check" size={40} color={T.success} sw={2.4} />
       </div>
@@ -225,7 +225,7 @@ const OVERVIEW_TILES = [T.magenta, T.purple, T.info, T.success, T.amber, T.dange
 
 export function ComponentsOverviewPreview() {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", width: 280, gap: 12, justifyContent: "center" }}>
+    <div style={{ display: "flex", flexWrap: "wrap", width: 280, gap: 12, justifyContent: "center", transform: "scale(1.25)" }}>
       {OVERVIEW_TILES.map((c, i) => (
         <div key={i} style={{ display: "flex", width: 56, height: 56, borderRadius: 12, backgroundColor: c, opacity: 0.92 }} />
       ))}
@@ -235,7 +235,7 @@ export function ComponentsOverviewPreview() {
 
 export function ButtonPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "flex-start" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "flex-start", transform: "scale(1.3)" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: T.magenta, borderRadius: 11, padding: "12px 22px", boxShadow: "0 8px 22px rgba(222, 14, 127, 0.35)" }}>
         <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 600, fontSize: 15, color: "#ffffff" }}>Start browsing</span>
       </div>
@@ -251,7 +251,7 @@ export function ButtonPreview() {
 
 export function BadgePreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-start" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 12, alignItems: "flex-start", transform: "scale(1.3)" }}>
       <Pill bg="rgba(31, 173, 102, 0.16)" color={T.successText}>Grade A</Pill>
       <Pill bg="rgba(138, 43, 184, 0.2)" color={T.purpleText}>Holo Rare</Pill>
       <Pill bg="rgba(222, 14, 127, 0.16)" color={T.accentText}>New</Pill>
@@ -267,7 +267,7 @@ const STATUS_ROWS: [string, string, string][] = [
 
 export function StatusBadgePreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 12, transform: "scale(1.3)" }}>
       {STATUS_ROWS.map(([label, dot, color]) => (
         <div key={label} style={{ display: "flex", alignItems: "center", gap: 9, padding: "8px 14px", borderRadius: 999, backgroundColor: T.surface, border: `1px solid ${T.border}` }}>
           <div style={{ display: "flex", width: 8, height: 8, borderRadius: 9999, backgroundColor: dot }} />
@@ -280,7 +280,7 @@ export function StatusBadgePreview() {
 
 export function CardPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: 260, borderRadius: 16, backgroundColor: T.surface, border: `1px solid ${T.border}` }}>
+    <div style={{ display: "flex", flexDirection: "column", width: 260, borderRadius: 16, backgroundColor: T.surface, border: `1px solid ${T.border}`, transform: "scale(1.3)" }}>
       <div style={{ display: "flex", padding: "14px 16px", borderBottom: `1px solid ${T.border}` }}>
         <span style={{ display: "flex", fontFamily: "Saira", fontWeight: 700, fontSize: 16, color: T.text }}>Charizard ex</span>
       </div>
@@ -299,7 +299,7 @@ export function CardPreview() {
 
 export function InputPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8, width: 280 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 8, width: 280, transform: "scale(1.25)" }}>
       <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 500, fontSize: 14, color: T.muted }}>Email address</span>
       <div style={{ display: "flex", alignItems: "center", width: "100%", height: 44, borderRadius: 11, backgroundColor: T.surface, border: `1.5px solid ${T.magenta}`, boxShadow: "0 0 0 3px rgba(222, 14, 127, 0.22)", padding: "0 14px" }}>
         <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 400, fontSize: 15, color: T.text }}>you@example.com</span>
@@ -310,7 +310,7 @@ export function InputPreview() {
 
 export function SearchBarPreview() {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 10, width: 300, height: 52, borderRadius: 999, backgroundColor: T.surface, border: `1px solid ${T.borderStrong}`, padding: "0 18px" }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 10, width: 300, height: 52, borderRadius: 999, backgroundColor: T.surface, border: `1px solid ${T.borderStrong}`, padding: "0 18px", transform: "scale(1.2)" }}>
       <StrokeIcon name="search" size={18} color={T.muted} sw={2} />
       <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 400, fontSize: 15, color: T.faint }}>Search sets, cards, sellers</span>
     </div>
@@ -319,7 +319,7 @@ export function SearchBarPreview() {
 
 export function QtyControlPreview() {
   return (
-    <div style={{ display: "flex", alignItems: "center", borderRadius: 11, border: `1px solid ${T.borderStrong}` }}>
+    <div style={{ display: "flex", alignItems: "center", borderRadius: 11, border: `1px solid ${T.borderStrong}`, transform: "scale(1.3)" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 40, height: 40, backgroundColor: T.surface }}>
         <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 600, fontSize: 18, color: T.text }}>-</span>
       </div>
@@ -335,7 +335,7 @@ export function QtyControlPreview() {
 
 export function TogglesPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "flex-start" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 14, alignItems: "flex-start", transform: "scale(1.3)" }}>
       <Segmented options={["Light", "Dark"]} activeIndex={1} />
       <Segmented options={["EN", "ES"]} activeIndex={0} />
       <Segmented options={["Buyer", "Seller"]} activeIndex={1} />
@@ -345,7 +345,7 @@ export function TogglesPreview() {
 
 export function NavbarPreview() {
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: 340, height: 56, borderRadius: 14, backgroundColor: T.surface, border: `1px solid ${T.border}`, padding: "0 16px" }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: 340, height: 56, borderRadius: 14, backgroundColor: T.surface, border: `1px solid ${T.border}`, padding: "0 16px", transform: "scale(1.05)" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <Mark width={18} />
         <span style={{ display: "flex", fontFamily: "Saira", fontWeight: 700, fontSize: 14, color: T.text }}>Deckcenter</span>
@@ -361,7 +361,7 @@ export function NavbarPreview() {
 
 export function ProductCardPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: 180, borderRadius: 16, backgroundColor: T.surface, border: `1px solid ${T.border}` }}>
+    <div style={{ display: "flex", flexDirection: "column", width: 180, borderRadius: 16, backgroundColor: T.surface, border: `1px solid ${T.border}`, transform: "scale(1.3)" }}>
       <div style={{ display: "flex", width: "100%", height: 110, borderRadius: "16px 16px 0 0", backgroundImage: `linear-gradient(135deg, ${T.purple}, ${T.magenta})` }} />
       <div style={{ display: "flex", flexDirection: "column", gap: 8, padding: 14 }}>
         <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 600, fontSize: 13, color: T.text }}>Base Set Booster</span>
@@ -381,7 +381,7 @@ export function CardArtPreview() {
     [T.amber, T.magenta],
   ];
   return (
-    <div style={{ display: "flex", gap: 14 }}>
+    <div style={{ display: "flex", gap: 14, transform: "scale(1.2)" }}>
       {hues.map(([a, b], i) => (
         <div key={i} style={{ display: "flex", width: 64, height: 88, borderRadius: 12, backgroundImage: `linear-gradient(160deg, ${a}, ${b})` }} />
       ))}
@@ -397,7 +397,7 @@ const PRICE_ROWS: [string, string, boolean][] = [
 
 export function PriceComparisonPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 10, width: 280 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 10, width: 280, transform: "scale(1.25)" }}>
       {PRICE_ROWS.map(([name, price, best]) => (
         <div key={name} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 14px", borderRadius: 11, backgroundColor: T.surface, border: `1px solid ${best ? T.magenta : T.border}` }}>
           <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 500, fontSize: 14, color: T.text }}>{name}</span>
@@ -410,7 +410,7 @@ export function PriceComparisonPreview() {
 
 export function InboxRowPreview() {
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: 12, width: 320, padding: 14, borderRadius: 14, backgroundColor: T.surface, border: `1px solid ${T.border}` }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 12, width: 320, padding: 14, borderRadius: 14, backgroundColor: T.surface, border: `1px solid ${T.border}`, transform: "scale(1.1)" }}>
       <div style={{ display: "flex", width: 36, height: 36, borderRadius: 9999, backgroundImage: `linear-gradient(135deg, ${T.info}, ${T.purple})` }} />
       <div style={{ display: "flex", flexDirection: "column", gap: 6, flex: 1 }}>
         <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 600, fontSize: 14, color: T.text }}>Order #4821 shipped</span>
@@ -433,7 +433,7 @@ const LIFECYCLE_STEPS: [string, string][] = [
 
 export function OrderLifecyclePreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: 300, position: "relative" }}>
+    <div style={{ display: "flex", flexDirection: "column", width: 300, position: "relative", transform: "scale(1.2)" }}>
       <div style={{ position: "absolute", left: 6, top: 14, bottom: 14, width: 2, display: "flex", backgroundColor: T.border }} />
       <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
         {LIFECYCLE_STEPS.map(([label, color]) => (
@@ -449,7 +449,7 @@ export function OrderLifecyclePreview() {
 
 export function ThemingPreview() {
   return (
-    <div style={{ display: "flex", width: 320, height: 180, borderRadius: 16, border: `1px solid ${T.border}` }}>
+    <div style={{ display: "flex", width: 320, height: 180, borderRadius: 16, border: `1px solid ${T.border}`, transform: "scale(1.1)" }}>
       <div style={{ display: "flex", flex: 1, flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12, backgroundColor: "#f4f6fc", borderRadius: "16px 0 0 16px" }}>
         <div style={{ display: "flex", backgroundColor: T.magenta, borderRadius: 9, padding: "8px 16px" }}>
           <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 600, fontSize: 12, color: "#ffffff" }}>Buy now</span>
@@ -468,7 +468,7 @@ export function ThemingPreview() {
 
 export function InternationalizationPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 18, alignItems: "flex-start" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 18, alignItems: "flex-start", transform: "scale(1.3)" }}>
       <Segmented options={["EN", "ES"]} activeIndex={0} />
       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
         <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 500, fontSize: 17, color: T.text }}>Add to cart</span>
