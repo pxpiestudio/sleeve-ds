@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/dc/theme-toggle";
 import { Icon } from "@/components/dc/icon";
 import { DOCS_NAV } from "@/components/docs/nav";
-import { useSearch } from "@/components/docs/search-provider";
 
 /**
  * Documentation shell chrome: fixed sidebar on desktop, sticky header +
@@ -18,7 +17,6 @@ import { useSearch } from "@/components/docs/search-provider";
  */
 export function DocsSidebar() {
   const pathname = usePathname();
-  const { openSearch } = useSearch();
 
   // Mobile: the sidebar collapses into an off-canvas drawer opened from the
   // sticky mobile header. Desktop keeps the always-visible fixed sidebar and
@@ -99,11 +97,6 @@ export function DocsSidebar() {
             <Icon name="close" size={20} />
           </button>
         </div>
-        <button type="button" className="ds-search-trigger" onClick={openSearch}>
-          <Icon name="search" size={16} />
-          <span>Search docs…</span>
-          <span className="ds-kbd" aria-hidden="true">⌘K</span>
-        </button>
         <nav className="ds-nav" aria-label="Documentation">
           {DOCS_NAV.map((group) => (
             <React.Fragment key={group.title}>
