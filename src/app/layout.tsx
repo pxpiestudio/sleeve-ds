@@ -32,13 +32,17 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL ?? "https://sleeve.deckcenter.store",
   ),
   title: {
-    default: "Sleeve System",
-    template: "%s · Sleeve System",
+    default: "Sleeve System — Deckcenter Marketplace Design System",
+    template: "%s · Sleeve System — Deckcenter Marketplace Design System",
   },
   description:
     "A complete, themeable React + Tailwind foundation for the Deckcenter marketplace. Every surface, token, component, and pattern — light and dark.",
   icons: {
     icon: "/assets/deckcenter-mark.svg",
+  },
+  openGraph: {
+    siteName: "Sleeve System",
+    type: "website",
   },
 };
 
