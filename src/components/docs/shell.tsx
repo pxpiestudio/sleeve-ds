@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+import { APP_VERSION } from "@/lib/version";
 import { ThemeToggle } from "@/components/dc/theme-toggle";
 import { Icon } from "@/components/dc/icon";
 import { DOCS_NAV } from "@/components/docs/nav";
@@ -55,7 +56,7 @@ export function DocsSidebar() {
           <img src="/assets/deckcenter-mark.svg" alt="" />
           <div>
             <span className="ds-logo-text">Sleeve System</span>
-            <span className="ds-logo-sub">v2.1</span>
+            <span className="ds-logo-sub">v{APP_VERSION}</span>
           </div>
         </div>
         <div className="ds-mobile-actions">
@@ -86,7 +87,7 @@ export function DocsSidebar() {
             <img src="/assets/deckcenter-mark.svg" alt="" />
             <span>
               <span className="ds-logo-text">Sleeve System</span>
-              <span className="ds-logo-sub">Design System · v2.1</span>
+              <span className="ds-logo-sub">Design System · v{APP_VERSION}</span>
             </span>
           </Link>
           <button
