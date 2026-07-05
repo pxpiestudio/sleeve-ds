@@ -63,6 +63,12 @@ export function LanguageProvider({
 }) {
   const [lang, setLang] = React.useState<Lang>(defaultLang);
 
+  // Keep the document language in sync so assistive tech switches
+  // pronunciation rules when the user toggles EN/ES.
+  React.useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
   const value = React.useMemo<LanguageContextValue>(
     () => ({
       lang,

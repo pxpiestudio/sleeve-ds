@@ -64,8 +64,8 @@ const dark = {
   successText: "#1fad66",
   dangerText: "#e14d70",
   amberText: "#f0a030",
-  infoText: "#4b85e1",
-  purpleText: "#ac6acd",
+  infoText: "#538be2",
+  purpleText: "#b070cf",
 } as const satisfies Record<string, Hex>;
 
 /**
@@ -148,6 +148,23 @@ function buildFixtures(t: typeof light | typeof dark, theme: "light" | "dark"): 
     { source: ".nu-link — on-navy @ 58% on navy-surface", fg: nuLinkFg, bg: t.navySurface, size: "normal" },
     { source: ".nu-btn — on-navy @ 65% on navy-surface", fg: nuBtnFg, bg: t.navySurface, size: "normal" },
     { source: ".cmp-price — text on --surface-2, 20px/700 (large)", fg: t.text, bg: t.surface2, size: "large" },
+
+    // ── Documentation-site pairs (doc-* classes in design-system.css) ──
+    // Code blocks are always navy (--code-bg = --navy-surface) regardless of
+    // theme, so every one of these pairs is checked against t.navySurface,
+    // not t.surface2 — see the --code-* token comment in deckcenter.css.
+    { source: ".doc-code pre — code-text (on-navy) on --code-bg", fg: t.onNavy, bg: t.navySurface, size: "normal" },
+    { source: ".doc-tok-c — code-muted on --code-bg (code comments)", fg: "#9aa0c4", bg: t.navySurface, size: "normal" },
+    { source: ".doc-tok-k — code-keyword on --code-bg (code keywords)", fg: "#e85ba8", bg: t.navySurface, size: "normal" },
+    { source: ".doc-tok-s — code-string on --code-bg (code strings)", fg: "#1fad66", bg: t.navySurface, size: "normal" },
+    { source: ".doc-tok-t — code-tag on --code-bg (code tags)", fg: "#538be2", bg: t.navySurface, size: "normal" },
+    { source: ".doc-code-lang / .doc-copy-btn — code-faint (on-navy @ 55%, measured) on --code-bg", fg: compositeOver(t.onNavy, 0.55, t.navySurface), bg: t.navySurface, size: "normal" },
+    { source: ".doc-pagenav-label:hover — accent-text on --surface", fg: t.accentText, bg: t.surface, size: "normal" },
+    { source: ".theme-compare-tag — on-navy on navy-surface (Light/Dark labels)", fg: t.onNavy, bg: t.navySurface, size: "normal" },
+    // .doc-related-link now sits directly on the page background (no card
+    // surface), so its states reuse already-covered --bg pairs: resting
+    // label = "body on --bg" (line above), resting arrow = "faint on --bg",
+    // hover/focus label+arrow = "accent-text on --bg" (.ds-eyebrow row).
   ];
 }
 

@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
  * status) are built on top of this in `components/dc/badges.tsx`.
  */
 const badgeVariants = cva(
-  "inline-flex items-center gap-1 rounded-md font-head text-[11px] font-bold tracking-[0.03em] whitespace-nowrap",
+  "inline-flex items-center gap-1 rounded-md font-body text-[11px] font-bold tracking-[0.03em] whitespace-nowrap",
   {
     variants: {
       variant: {

@@ -1,10 +1,16 @@
 import { test, expect, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
+import { ALL_PAGES } from "../src/components/docs/nav";
+
 /**
- * Renders all components/states in one DOM (page.tsx statically lists every
- * Navbar auth state and component variant), so a single page load per theme
- * is sufficient coverage.
+ * Axe scan of every documentation route in both themes. The docs are now
+ * multi-page, so coverage comes from the site map itself (ALL_PAGES) — a new
+ * page added to the nav is automatically scanned.
+ *
+ * Theme is set via localStorage before load (the same key themeInitScript
+ * reads), so the correct theme applies before first paint and there is no
+ * 0.5s body crossfade for axe to sample mid-transition.
  */
 async function runAxe(page: Page) {
   const results = await new AxeBuilder({ page }).analyze();
@@ -16,21 +22,58 @@ async function runAxe(page: Page) {
   expect(summary, summary.join("\n\n")).toEqual([]);
 }
 
-// `body` has a 0.5s color/background transition (theme crossfade). Scanning
-// mid-transition makes axe sample an intermediate color and report a false
-// positive, so wait for it to settle before running color-contrast checks.
+for (const theme of ["light", "dark"] as const) {
+  test.describe(`axe — ${theme} theme`, () => {
+    test.use({ colorScheme: theme });
+
+    for (const docPage of ALL_PAGES) {
+      test(`${docPage.href} has no violations`, async ({ page }) => {
+        await page.addInitScript(
+          (t) => window.localStorage.setItem("dc-theme", t),
+          theme,
+        );
+        await page.goto(docPage.href);
+        if (theme === "dark") {
+          await expect(page.locator("html")).toHaveClass(/dark/);
+        }
+        await runAxe(page);
+      });
+    }
+  });
+}
+
+// `body` has a 0.5s color/background transition (theme crossfade). When the
+// theme changes *after* load, wait for it to settle before scanning so axe
+// doesn't sample an intermediate color.
 const THEME_TRANSITION_MS = 1000;
 
-test("design system page has no axe violations — light theme", async ({ page }) => {
+test("theme toggle flips the document class and stays axe-clean", async ({ page }) => {
   await page.goto("/");
+  await page
+    .getByRole("button", { name: "Toggle color theme" })
+    .first()
+    .click();
+  await expect(page.locator("html")).toHaveClass(/dark/);
   await page.waitForTimeout(THEME_TRANSITION_MS);
   await runAxe(page);
 });
 
-test("design system page has no axe violations — dark theme", async ({ page }) => {
+test("skip link is the first tab stop and targets the content region", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Toggle color theme" }).click();
-  await expect(page.locator("html")).toHaveClass(/dark/);
-  await page.waitForTimeout(THEME_TRANSITION_MS);
-  await runAxe(page);
+  await page.keyboard.press("Tab");
+  const skipLink = page.getByRole("link", { name: "Skip to content" });
+  await expect(skipLink).toBeFocused();
+  await skipLink.press("Enter");
+  await expect(page).toHaveURL(/#docs-content$/);
+});
+
+test("<html lang> follows the EN/ES language toggle", async ({ page }) => {
+  await page.goto("/patterns/internationalization");
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  // Scope to the LangToggle group — the navbar demo has its own EN/ES buttons.
+  const langGroup = page.getByRole("group", { name: "Language" });
+  await langGroup.getByRole("button", { name: "ES" }).click();
+  await expect(page.locator("html")).toHaveAttribute("lang", "es");
+  await langGroup.getByRole("button", { name: "EN" }).click();
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
 });

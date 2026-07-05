@@ -47,3 +47,12 @@ next-env.d.ts
 
 # graphify tool output
 /src/graphify-out/
+
+# agent skills (installed via `npx skills add`)
+/.agents/
+/.claude/
+/skills-lock.json
+
+# Playwright
+node_modules/
+/playwright/.auth/
