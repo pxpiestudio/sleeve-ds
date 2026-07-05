@@ -18,7 +18,8 @@ export type TokenRow = {
  */
 export function TokenTable({ rows }: { rows: TokenRow[] }) {
   return (
-    <div className="doc-table-wrap">
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- WCAG SCR26: makes the horizontally-scrollable wrapper keyboard-reachable
+    <div className="doc-table-wrap" tabIndex={0}>
       <table className="doc-table doc-token-table">
         <caption className="sr-only">Design tokens</caption>
         <thead>

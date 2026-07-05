@@ -19,7 +19,8 @@ export function PropsTable({
   caption?: string;
 }) {
   return (
-    <div className="doc-table-wrap">
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex -- WCAG SCR26: makes the horizontally-scrollable wrapper keyboard-reachable
+    <div className="doc-table-wrap" tabIndex={0}>
       <table className="doc-table">
         <caption className="sr-only">{caption}</caption>
         <thead>
