@@ -14,7 +14,13 @@ jobs:
       with:
         node-version: lts/*
     - name: Install dependencies
-      run: npm ci
+      # npm ci enforces exact lockfile parity, but the optional wasm32-wasi
+      # packages (@tailwindcss/oxide, @rolldown/binding, @unrs/resolver) each
+      # pin their own nested @emnapi/* versions that different npm versions
+      # resolve differently — GitHub's lts/* runner and a local dev npm can
+      # legitimately disagree on that subtree. Matches the Dockerfile, which
+      # uses npm install for the same reason.
+      run: npm install --no-audit --no-fund
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
