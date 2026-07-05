@@ -29,7 +29,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://sleeve.deckcenter.store",
+    process.env.NEXT_PUBLIC_SITE_URL || "https://sleeve.deckcenter.store",
   ),
   title: {
     default: "Sleeve System — Deckcenter Marketplace Design System",
