@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   ),
   title: {
     default: "Sleeve System — Deckcenter Marketplace Design System",
-    template: "%s · Sleeve System — Deckcenter Marketplace Design System",
+    template: "%s · Sleeve System",
   },
   description:
     "A complete, themeable React + Tailwind foundation for the Deckcenter marketplace. Every surface, token, component, and pattern — light and dark.",
