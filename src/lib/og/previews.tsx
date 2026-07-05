@@ -132,7 +132,7 @@ export function ColorPreview() {
 
 export function TypographyPreview() {
   return (
-    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 6 }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 6, transform: "scale(1.3)" }}>
       <span style={{ display: "flex", fontFamily: "Saira", fontWeight: 700, fontSize: 62, color: T.text, lineHeight: 1 }}>Aa</span>
       <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 500, fontSize: 32, color: T.text, lineHeight: 1 }}>Aa</span>
       <span style={{ display: "flex", fontFamily: "Geist", fontWeight: 400, fontSize: 19, color: T.muted, lineHeight: 1 }}>Aa</span>
