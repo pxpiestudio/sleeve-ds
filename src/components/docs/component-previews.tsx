@@ -14,6 +14,12 @@ import { LangToggle } from "@/components/dc/lang-toggle";
 import { ProductCard } from "@/components/dc/product-card";
 import { PriceComparison } from "@/components/dc/price-comparison";
 import { InboxRow } from "@/components/dc/inbox-row";
+import { ListingCard } from "@/components/dc/listing-card";
+import { ExpansionTile } from "@/components/dc/expansion-tile";
+import { SellerCard } from "@/components/dc/seller-card";
+import { StatStripe } from "@/components/dc/stat-stripe";
+import { SealedProductCard } from "@/components/dc/sealed-card";
+import { PlanCard } from "@/components/dc/plan-card";
 
 const fieldLabelStyle: CSSProperties = {
   display: "block",
@@ -234,6 +240,65 @@ export const COMPONENT_PREVIEWS: Record<string, ReactNode> = {
           }
         />
       </div>
+    </Stage>
+  ),
+
+  "/components/listing-card": (
+    <Stage width={220} scale={0.55} align="start">
+      <ListingCard
+        hue={8}
+        title="Charizard ex — 151"
+        grade="PSA 10"
+        condition="Gem Mint"
+        seller={{ name: "VaultCards", verified: true, rating: "4.98" }}
+        price="$412.50"
+        shipping="Ships Today"
+      />
+    </Stage>
+  ),
+
+  "/components/expansion-tile": (
+    <ExpansionTile hue={8} symbol="✦" name="151" meta="MEW · 2023" count="4 cards" active />
+  ),
+
+  "/components/seller-card": (
+    <Stage width={180} scale={0.75}>
+      <SellerCard
+        hue={330}
+        name="VaultCards"
+        handle="vaultcards"
+        badge="Power Seller"
+        stats={{ rating: "4.98", reviews: "3.1k", items: "4.2k" }}
+      />
+    </Stage>
+  ),
+
+  "/components/stat-stripe": (
+    <Stage width={340} scale={0.55} align="start">
+      <StatStripe
+        cells={[
+          { value: "2,310", label: "Cards sold · 24h" },
+          { value: "14k", label: "Live listings", accent: true },
+        ]}
+      />
+    </Stage>
+  ),
+
+  "/components/sealed-product-card": (
+    <SealedProductCard hue={48} type="ETB" name="Surging Sparks" style={{ width: 92 }} />
+  ),
+
+  "/components/plan-card": (
+    <Stage width={220} scale={0.5} align="start">
+      <PlanCard
+        name="Seller Pro"
+        tagline="For power sellers moving real volume."
+        benefits={["Bulk listing tools", "Verified seller badge"]}
+        price={{ amount: "$19", period: "/ mo" }}
+        cta={{ label: "Upgrade to Pro", variant: "primary" }}
+        pro
+        badge="Popular"
+      />
     </Stage>
   ),
 };
