@@ -99,7 +99,7 @@ export const COMPONENT_PREVIEWS: Record<string, ReactNode> = {
   ),
 
   "/components/card": (
-    <Card style={{ width: 190 }}>
+    <Card style={{ width: 230 }}>
       <CardHeader>
         <CardTitle style={{ fontSize: 14 }}>Seller payout</CardTitle>
         <CardDescription style={{ fontSize: 11.5 }}>Transferred after pickup.</CardDescription>
@@ -108,7 +108,7 @@ export const COMPONENT_PREVIEWS: Record<string, ReactNode> = {
   ),
 
   "/components/input": (
-    <div style={{ width: 190 }}>
+    <div style={{ width: 230 }}>
       <label htmlFor="preview-input-email" style={fieldLabelStyle}>
         Email
       </label>
@@ -244,7 +244,7 @@ export const COMPONENT_PREVIEWS: Record<string, ReactNode> = {
   ),
 
   "/components/listing-card": (
-    <Stage width={220} scale={0.55} align="start">
+    <Stage width={360} scale={0.53}>
       <ListingCard
         hue={8}
         title="Charizard ex — 151"
@@ -262,23 +262,27 @@ export const COMPONENT_PREVIEWS: Record<string, ReactNode> = {
   ),
 
   "/components/seller-card": (
-    <Stage width={180} scale={0.75}>
-      <SellerCard
-        hue={330}
-        name="VaultCards"
-        handle="vaultcards"
-        badge="Power Seller"
-        stats={{ rating: "4.98", reviews: "3.1k", items: "4.2k" }}
-      />
+    <Stage width={180} scale={0.75} align="start">
+      <div style={{ paddingTop: 16 }}>
+        <SellerCard
+          hue={330}
+          name="VaultCards"
+          handle="vaultcards"
+          badge="Power Seller"
+          stats={{ rating: "4.98", reviews: "3.1k", items: "4.2k" }}
+        />
+      </div>
     </Stage>
   ),
 
   "/components/stat-stripe": (
-    <Stage width={340} scale={0.55} align="start">
+    <Stage width={640} scale={0.37}>
       <StatStripe
         cells={[
           { value: "2,310", label: "Cards sold · 24h" },
           { value: "14k", label: "Live listings", accent: true },
+          { value: "98%", label: "Verified sellers" },
+          { value: "4.9★", label: "Avg rating" },
         ]}
       />
     </Stage>
@@ -290,15 +294,20 @@ export const COMPONENT_PREVIEWS: Record<string, ReactNode> = {
 
   "/components/plan-card": (
     <Stage width={220} scale={0.5} align="start">
-      <PlanCard
-        name="Seller Pro"
-        tagline="For power sellers moving real volume."
-        benefits={["Bulk listing tools", "Verified seller badge"]}
-        price={{ amount: "$19", period: "/ mo" }}
-        cta={{ label: "Upgrade to Pro", variant: "primary" }}
-        pro
-        badge="Popular"
-      />
+      {/* PlanCard's "pro" badge is `position: absolute; top: -14px`, floating
+       * above the card's own box — this padding gives it room so align="start"
+       * doesn't clip it against the tile's top edge. */}
+      <div style={{ paddingTop: 30 }}>
+        <PlanCard
+          name="Seller Pro"
+          tagline="For power sellers moving real volume."
+          benefits={["Bulk listing tools", "Verified seller badge"]}
+          price={{ amount: "$19", period: "/ mo" }}
+          cta={{ label: "Upgrade to Pro", variant: "primary" }}
+          pro
+          badge="Popular"
+        />
+      </div>
     </Stage>
   ),
 };

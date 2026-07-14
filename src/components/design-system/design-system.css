@@ -1065,6 +1065,13 @@
 .doc-tile {
   display: flex;
   flex-direction: column;
+  /* Capped so a tile never stretches arbitrarily wide when only one or two
+   * grid columns fit (narrow viewports) — small-natural-width previews
+   * (Card, Button, Badge, ...) would otherwise float in a sea of empty
+   * dotted background. Capped on the tile itself (not the grid track, via
+   * e.g. `minmax(272px, 380px)`) so columns still stretch evenly to fill
+   * the row at wider viewports where more than one fits per row. */
+  max-width: 380px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 14px;
