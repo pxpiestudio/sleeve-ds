@@ -153,6 +153,36 @@ export const DOCS_NAV: DocGroup[] = [
         label: "Inbox row",
         description: "Dense order rows that reflow on mobile.",
       },
+      {
+        href: "/components/listing-card",
+        label: "Listing card",
+        description: "One seller's row for a card — grade, seller, price.",
+      },
+      {
+        href: "/components/expansion-tile",
+        label: "Expansion tile",
+        description: "Set selector for horizontal rails.",
+      },
+      {
+        href: "/components/seller-card",
+        label: "Seller card",
+        description: "Public seller profile summary.",
+      },
+      {
+        href: "/components/stat-stripe",
+        label: "Stat stripe",
+        description: "Hairline-divided headline metrics, plus a mini bar chart.",
+      },
+      {
+        href: "/components/sealed-product-card",
+        label: "Sealed product card",
+        description: "Metallic placeholder for booster boxes and ETBs.",
+      },
+      {
+        href: "/components/plan-card",
+        label: "Plan card",
+        description: "Pricing tier card, with a featured/pro variant.",
+      },
     ],
   },
   {
