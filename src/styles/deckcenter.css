@@ -50,19 +50,21 @@
   --border-strong: rgba(18, 20, 39, 0.16);
   --shadow: 0 1px 2px rgba(18, 20, 39, 0.06), 0 8px 24px rgba(18, 20, 39, 0.07);
   --shadow-lg: 0 2px 4px rgba(18, 20, 39, 0.05), 0 24px 60px rgba(18, 20, 39, 0.16);
-  --navy-surface: #14172b;
+  --navy-surface: #05060d;
   --on-navy: #e8edf9;
 
   /*
    * Documentation code blocks always render navy, regardless of light/dark
    * theme (readability + brand consistency — same reasoning as the .nu-*
    * utility-bar chrome, which these mirror). Defined once here, not
-   * repeated under .dark, since --navy-surface already resolves to the
-   * right navy per theme (#14172b light / #1c2038 dark) and the rest are
-   * literal on-navy alpha steps that don't need to change. Values chosen to
-   * clear 4.5:1 against BOTH navy-surface shades — verified in
-   * contrast.test.ts rather than eyeballed, since a color tuned for one
-   * navy isn't guaranteed to clear the other.
+   * repeated under .dark, since --navy-surface is the same #05060d in both
+   * themes and the rest are literal on-navy alpha steps that don't need to
+   * change. It's darker than every other dark-mode surface (including
+   * --bg #0a0c18) on purpose: in light mode the band works because it's
+   * the darkest thing on the page, and it needs to stay the darkest thing
+   * on the page in dark mode too, or it just reads as another panel
+   * instead of a grounding band. Values chosen to clear 4.5:1 against
+   * navy-surface — verified in contrast.test.ts rather than eyeballed.
    */
   --code-bg: var(--navy-surface);
   --code-text: var(--on-navy);
@@ -115,7 +117,15 @@
   --border-strong: rgba(232, 237, 249, 0.18);
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 30px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 2px 6px rgba(0, 0, 0, 0.5), 0 30px 70px rgba(0, 0, 0, 0.55);
-  --navy-surface: #1c2038;
+  /* Same value as light — --navy-surface is a fixed "always-dark" band
+     (utility strip, hero, code blocks), not a themed surface. It's deliberately
+     darker than --surface (#15182c) and even --bg (#0a0c18): an earlier
+     attempt at this token just reused the light-mode navy (#14172b), but
+     that sits almost on top of --surface in dark mode, so the strip barely
+     separated from the navbar row beneath it. Going darker than every other
+     dark-mode surface reproduces the "darkest thing on the page" contrast
+     the band gets for free in light mode against white/near-white surfaces. */
+  --navy-surface: #05060d;
   --on-navy: #e8edf9;
 
   --accent-text: #e85ba8;

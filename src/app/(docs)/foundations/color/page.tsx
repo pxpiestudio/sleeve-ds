@@ -69,7 +69,7 @@ export default function ColorPage() {
             { token: "--bg-2", light: "#eaeefa", dark: "#0e1124", usage: "Recessed wells: demo canvases, hero bands, input backdrops." },
             { token: "--surface", light: "#ffffff", dark: "#15182c", usage: "Cards, nav bar, dropdowns — anything that sits on the page." },
             { token: "--surface-2", light: "#f3f5fc", dark: "#1c2038", usage: "Nested fills inside a surface: table headers, chips, code bars." },
-            { token: "--navy-surface", light: "#14172b", dark: "#1c2038", usage: "The always-dark band (utility strip, hero). Pair with --on-navy text." },
+            { token: "--navy-surface", light: "#05060d", dark: "#05060d", usage: "The always-dark band (utility strip, hero) — fixed, darker than every other surface in either theme. Pair with --on-navy text." },
           ]}
         />
       </DocSection>
